@@ -28,7 +28,7 @@ class MainController{
         $this->generatePage($data_page);
     }
 
-    public function pageErreur($msg){
+    public function errorPage($msg){
         $data_page = [
             "page_description" => "Page permettant de gérer les erreurs",
             "page_title" => "Page d'erreur",
