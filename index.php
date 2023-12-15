@@ -16,7 +16,7 @@ $mainController = new MainController();
 
 try{
     if(empty($_GET['page'])){
-        $page = 'home';
+        $page = 'homepage';
     }else{
         $url = explode('/', filter_var($_GET['page'], FILTER_SANITIZE_URL));
         $page = $url[0];
