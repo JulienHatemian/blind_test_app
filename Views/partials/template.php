@@ -24,5 +24,11 @@
         ?>
         <?= $page_content; ?>
     </main>
+    <?php require_once("Views/partials/footer.php") ?>
+    <?php if(!empty($page_javascript)) : ?>
+        <?php foreach($page_javascript as $file_js) : ?>
+            <script src="<?= URL ?>assets/js/<?= $file_js ?>"></script>
+        <?php endforeach ?>
+    <?php endif; ?>
 </body>
 </html>
