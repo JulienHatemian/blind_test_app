@@ -21,6 +21,11 @@ try{
         $url = explode('/', filter_var($_GET['page'], FILTER_SANITIZE_URL));
         $page = $url[0];
     }
+    switch($page){
+        case "homepage": $mainController->homepage();
+            break;    
+        default: throw new RuntimeException("La page n'existe pas");
+    }
 }catch(Exception $e){
     $mainController->errorPage($e->getMessage());
 }

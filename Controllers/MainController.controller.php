@@ -14,7 +14,7 @@ class MainController{
 
     //Propriété "page_css" : tableau permettant d'ajouter des fichiers CSS spécifiques
     //Propriété "page_javascript" : tableau permettant d'ajouter des fichiers JavaScript spécifiques
-    public function home(){
+    public function homepage(){
         // Toolbox::ajouterMessageAlerte("test", Toolbox::COULEUR_VERTE);
 
         $data_page = [
