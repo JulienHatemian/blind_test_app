@@ -10,7 +10,7 @@ abstract class MainRepository
         $req = "SELECT * FROM blindtest";
         $pdo = $this->getDatabase()->prepare($req);
         $pdo->execute();
-        $data = $pdo->fetchAll(pdo::FETCH_ASSOC);
+        $data = $pdo->fetchAll(PDO::FETCH_ASSOC);
         $pdo->closeCursor();
         return $data;
     }

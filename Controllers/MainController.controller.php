@@ -20,10 +20,10 @@ class MainController{
         $data_page = [
             "page_description" => "Description de la page d'accueil",
             "page_title" => "Titre de la page d'accueil",
-            "views" => "views/blindtest.php",
+            "views" => "views/homepage.php",
             "template" => "views/partials/template.php",
-            'page_css' => ['style.css'],
-            'page_javascript' => ['script.js']
+            "page_css" => ['style.css'],
+            "page_javascript" => ['script.js']
         ];
         $this->generatePage($data_page);
     }
