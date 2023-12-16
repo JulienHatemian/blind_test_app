@@ -16,7 +16,20 @@ body{
 #header>h1{
     display: flex;
     color: #fff;
-    text-align: center;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+#footer{
+    background-color: rgb(61, 61, 61);
+    width: 100%;
+    height: 30px;
+}
+
+#footer>p{
+    display: flex;
+    color: #fff;
     align-items: center;
     justify-content: center;
     height: 100%;
