@@ -12,6 +12,7 @@
 </head>
 <body>
     <main>
+        <?php require_once("Views/partials/header.php") ?>
         <?php
             if(!empty($_SESSION['alert'])) {
                 foreach($_SESSION['alert'] as $alert){
