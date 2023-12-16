@@ -1,15 +1,15 @@
 <?php
 namespace Blindtest\Controllers;
 
-use Blindtest\Repository\MainRepository;
+// use Blindtest\Repository\MainRepository;
 
-require_once(__DIR__ . '/../Models/MainRepository.php');
+// require_once(__DIR__ . '/../Models/MainRepository.php');
 
 class MainController{
-    private MainRepository $mainRepository;
+    // private MainRepository $mainRepository;
 
     public function __construct(){
-        $this->mainRepository = new MainRepository();
+        // $this->mainRepository = new MainRepository();
     }
 
     protected function generatePage($data){
@@ -24,7 +24,7 @@ class MainController{
     //Propriété "page_javascript" : tableau permettant d'ajouter des fichiers JavaScript spécifiques
     public function homepage(){
         // Toolbox::ajouterMessageAlerte("test", Toolbox::COULEUR_VERTE);
-        $test = $this->mainRepository->getData();
+        // $test = $this->mainRepository->getData();
 
         $data_page = [
             "page_description" => "Description de la page d'accueil",
@@ -33,7 +33,7 @@ class MainController{
             "template" => "views/partials/template.php",
             "page_css" => ['style.css'],
             "page_javascript" => ['script.js'],
-            "data" => $test
+            // "data" => $test
         ];
         $this->generatePage($data_page);
     }
