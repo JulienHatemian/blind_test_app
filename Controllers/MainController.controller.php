@@ -1,7 +1,15 @@
 <?php
 namespace Blindtest\Controllers;
+
+use Blindtest\Repository\MainRepository;
+
+require_once(__DIR__ . '/../Models/MainRepository.php');
+
 class MainController{
+    private MainRepository $mainRepository;
+
     public function __construct(){
+        $this->mainRepository = new MainRepository();
     }
 
     protected function generatePage($data){
@@ -16,6 +24,7 @@ class MainController{
     //Propriété "page_javascript" : tableau permettant d'ajouter des fichiers JavaScript spécifiques
     public function homepage(){
         // Toolbox::ajouterMessageAlerte("test", Toolbox::COULEUR_VERTE);
+        $test = $this->mainRepository->getData();
 
         $data_page = [
             "page_description" => "Description de la page d'accueil",
@@ -23,7 +32,8 @@ class MainController{
             "views" => "views/homepage.php",
             "template" => "views/partials/template.php",
             "page_css" => ['style.css'],
-            "page_javascript" => ['script.js']
+            "page_javascript" => ['script.js'],
+            "data" => $test
         ];
         $this->generatePage($data_page);
     }
@@ -33,7 +43,7 @@ class MainController{
             "page_description" => "Page permettant de gérer les erreurs",
             "page_title" => "Page d'erreur",
             "msg" => $msg,
-            "views" => "views/erreur.view.php",
+            "views" => "views/error.view.php",
             "template" => "views/partials/template.php",
         ];
         $this->generatePage($data_page);
