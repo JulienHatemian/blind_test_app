@@ -21,9 +21,11 @@ try{
         $url = explode('/', filter_var($_GET['page'], FILTER_SANITIZE_URL));
         $page = $url[0];
     }
+    
     switch($page){
         case "homepage": $mainController->homepage();
-            break;    
+            break;
+        case "gameselection": $blindtestController->gameselection();
         default: throw new RuntimeException("La page n'existe pas");
     }
 }catch(Exception $e){
