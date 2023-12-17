@@ -1,0 +1,1 @@
+<h1>Blintest - Configuration</h1>

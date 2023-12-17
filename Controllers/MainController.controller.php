@@ -29,7 +29,7 @@ class MainController{
         $data_page = [
             "page_description" => "Description de la page d'accueil",
             "page_title" => "Titre de la page d'accueil",
-            "views" => "views/homepage.php",
+            "views" => "views/homepage.view.php",
             "template" => "views/partials/template.php",
             "page_css" => ['style.css'],
             "page_javascript" => ['script.js'],

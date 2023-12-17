@@ -10,19 +10,15 @@ class BlindtestController
     {
     }
 
-    public function blindtestConfig(){
+    public function gameconfig(){
         $data_page = [
             "page_description" => "Blindtest's configuration.",
             "page_title" => "Blindtest - Configuration",
-            "views" => "views/configration.views.php",
+            "views" => "views/gameconfig.view.php",
             "template" => "views/partials/template.php",
             "page_css" => ['style.css', 'configuration.css']
         ];
 
         $this->generatePage($data_page);
-    }
-
-    public function classic(){
-
     }
 }

@@ -1,3 +1,3 @@
 <div id="header">
-    <h1>Blindtest</h1>
+    <h1><a href="<?= URL; ?>homepage">Blindtest</a></h1>
 </div>

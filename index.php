@@ -1,5 +1,6 @@
 <?php
 use Blindtest\Controllers\MainController;
+use Blindtest\Controllers\BlindtestController;
 use Blindtest\Controllers\Toolbox;
 use Blindtest\Controllers\Security;
 
@@ -9,10 +10,12 @@ define('URL', str_replace('index.php', '', (isset($_SERVER['HTTPS']) ? 'https' :
     '://' . $_SERVER['HTTP_HOST'] . $_SERVER['PHP_SELF'] ));
 
 require_once 'Controllers/MainController.controller.php';
+require_once 'Controllers/BlindtestController.controller.php';
 require_once 'Controllers/Security.php';
 require_once 'Controllers/Toolbox.class.php';
 
 $mainController = new MainController();
+$blindtestController = new BlindtestController();
 
 try{
     if(empty($_GET['page'])){
@@ -21,11 +24,12 @@ try{
         $url = explode('/', filter_var($_GET['page'], FILTER_SANITIZE_URL));
         $page = $url[0];
     }
-    
+
     switch($page){
         case "homepage": $mainController->homepage();
             break;
-        case "gameselection": $blindtestController->gameselection();
+        case "gameconfig": $blindtestController->gameconfig();
+            break;
         default: throw new RuntimeException("La page n'existe pas");
     }
 }catch(Exception $e){
