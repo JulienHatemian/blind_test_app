@@ -43,4 +43,20 @@ class BlindtestController
 
         $this->generatePage($data_page);
     }
+
+    public function blindtest()
+    {
+        $post = $_POST;
+        $data_page = [
+            "page_description" => "Blindtest's configuration.",
+            "page_title" => "Blindtest - Configuration",
+            "views" => "views/blindtest.view.php",
+            "template" => "views/partials/template.php",
+            "page_css" => ['style.css', 'blindtest.css'],
+            // "blindtest_data" => $blindtest
+            "blindtest_data" => $post
+        ];
+
+        $this->generatePage($data_page);
+    }
 }

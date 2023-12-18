@@ -30,6 +30,8 @@ try{
             break;
         case "gameconfig": $blindtestController->gameconfig();
             break;
+        case "blindtest": $blindtestController->blindtest();
+            break;
         default: throw new RuntimeException("La page n'existe pas");
     }
 }catch(Exception $e){

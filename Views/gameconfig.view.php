@@ -1,10 +1,10 @@
 <h1>Blintest - Configuration</h1>
-<form action="#" method="post" id="form-config">
+<form action="<?= URL; ?>blindtest" method="post" id="form-config">
     <div class="form-group">
         <legend>Genres:</legend>
         <?php if(isset($genres)) :?>
         <?php foreach($genres as $genre): ?>
-            <input type="checkbox" name="genre" value="<?= $genre['idgenre'] ?>">
+            <input type="checkbox" name="genre[]" value="<?= $genre['idgenre'] ?>">
             <label for=""><?= $genre['libelle'] ?></label>
         <?php endforeach; endif; ?>
     </div>
@@ -13,7 +13,7 @@
         <legend>Types:</legend>
         <?php if(isset($types)) :?>
         <?php foreach($types as $type): ?>
-            <input type="checkbox" name="type" value="<?= $type['idtype'] ?>">
+            <input type="checkbox" name="type[]" value="<?= $type['idtype'] ?>">
             <label for=""><?= $type['libelle'] ?></label>
         <?php endforeach; endif; ?>
     </div>
@@ -35,7 +35,7 @@
         <legend>Game mode:</legend>
         <?php if(isset($gamemodes)) :?>
         <?php foreach($gamemodes as $gamemode): ?>
-            <button type="submit" class="button-type" href="#"><?= $gamemode['libelle'] ?></button>
+            <button type="submit" class="button-type" name="gamemode" value="<?= $gamemode['idgamemode'] ?>"><?= $gamemode['libelle'] ?></button>
         <?php endforeach; endif; ?>
     </div>
 </form>
