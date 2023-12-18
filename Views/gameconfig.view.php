@@ -21,12 +21,12 @@
     <div class="form-group">
         <div class="form-item">
             <label for="timer">Timer:</label>
-            <input type="number" value="10" id="timer" name="timer"> second(s)
+            <input type="number" value="10" id="timer" name="timer" min="1" max="30"> second(s)
             <small>Min.: 1 sec - Max.: 30 sec</small>
         </div>
         <div class="form-item">
             <label for="rounds">Rounds:</label>
-            <input type="number" value="10" id="rounds" name="rounds">
+            <input type="number" value="10" id="rounds" name="rounds" min="1" max="30">
             <small>Min.: 1 round - Max.: 30 rounds</small>
         </div>
     </div>

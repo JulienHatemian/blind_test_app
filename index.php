@@ -33,7 +33,14 @@ try{
         case "blindtest": 
             if(!isset($_POST['genre'])){
                 Toolbox::addAlertMessage(
-                    "Please choose a genre !",
+                    "Please, choose at least 1 genre.",
+                    Toolbox::RED_COLOR
+                );
+                header("Location: " . URL . 'gameconfig');
+            }
+            if(!isset($_POST['type'])){
+                Toolbox::addAlertMessage(
+                    "Please, choose at least 1 type.",
                     Toolbox::RED_COLOR
                 );
                 header("Location: " . URL . 'gameconfig');
