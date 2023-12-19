@@ -48,7 +48,7 @@ class BlindtestController
     {
         $post = $_POST;
         $data_page = [
-            "page_description" => "Blindtest's configuration.",
+            "page_description" => "Blindtest.",
             "page_title" => "Blindtest - Configuration",
             "views" => "views/blindtest.view.php",
             "template" => "views/partials/template.php",
