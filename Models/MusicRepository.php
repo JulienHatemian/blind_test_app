@@ -28,19 +28,34 @@ class MusicRepository
 
     public function getBlindtestMusic(array $genres, array $types, int $round) :array
     {
-        $in = '';
+        $ingenre = '';
         $i = 0;
         foreach($genres as $genre){
             $key = ':idgenre' . $i++;
-            $in .= ($in ? ',' : '') . $key;
+            $ingenre .= ($ingenre ? ',' : '') . $key;
             $ingenres[$key] = $genre;
         }
 
-        $req = "SELECT * FROM music WHERE idgenre IN ($in) ORDER BY RAND() LIMIT :random";
+        unset($key);
+        unset($i);
+
+        $intype = '';
+        $i = 0;
+        foreach($types as $type){
+            $key = ':idtype' . $i++;
+            $intype .= ($intype ? ',' : '') . $key;
+            $intypes[$key] = $type;
+        }
+
+        $req = "SELECT * FROM music WHERE idgenre IN ($ingenre) AND idtype IN ($intype) ORDER BY RAND() LIMIT :random";
         $pdo = $this->getDatabase()->prepare($req);
 
         foreach($ingenres as $ingenre => $keygenre){
             $pdo->bindValue($ingenre, $keygenre, PDO::PARAM_INT);
+        }
+
+        foreach($intypes as $intype => $keytype){
+            $pdo->bindValue($intype, $keytype, PDO::PARAM_INT);
         }
 
         $pdo->bindValue(':random', $round, PDO::PARAM_INT);
