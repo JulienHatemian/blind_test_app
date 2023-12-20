@@ -51,8 +51,8 @@ class BlindtestController
     public function blindtest()
     {
         $post = $_POST;
-
-        $blindtest = $this->musicRepository->getBlindtestMusic($post['genre'], $post['type'], $post['rounds']);
+        $blindtest = $this->musicRepository->createBlindtest($post['genre'], $post['type'], $post['timer'], $post['rounds'], $post['gamemode']);
+        
         $data_page = [
             "page_description" => "Blindtest.",
             "page_title" => "Blindtest",
