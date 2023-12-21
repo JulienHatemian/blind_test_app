@@ -30,23 +30,15 @@ try{
             break;
         case "gameconfig": $blindtestController->gameconfig();
             break;
-        case "blindtest": 
-            if(!isset($_POST['genre'])){
-                Toolbox::addAlertMessage(
-                    "Please, choose at least 1 genre.",
-                    Toolbox::RED_COLOR
-                );
-                header("Location: " . URL . 'gameconfig');
-            }
-            if(!isset($_POST['type'])){
-                Toolbox::addAlertMessage(
-                    "Please, choose at least 1 type.",
-                    Toolbox::RED_COLOR
-                );
-                header("Location: " . URL . 'gameconfig');
-            }
-            else{
+        case "blindtest":
+            if(!empty($_POST['genre']) && !empty($_POST['type'])){
                 $blindtestController->blindtest();
+            } else{
+                Toolbox::addAlertMessage(
+                    "Please, choose at least 1 genre & 1 type.",
+                    Toolbox::RED_COLOR
+                );
+                header("Location: " . URL . 'gameconfig');
             }
             break;
         default: throw new RuntimeException("La page n'existe pas");

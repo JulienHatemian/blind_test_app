@@ -2,5 +2,5 @@
 
 <?php
     // var_dump($blindtest_data);
-    var_dump($blindtest);
+    var_dump($_SESSION);
 ?>

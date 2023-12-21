@@ -17,7 +17,7 @@ class MusicRepository
         return $data;
     }
 
-    public function createBlindtest(array $genre, array $type, int $timer, int $round, int $gamemode) :array
+    public function createBlindtest(array $genre, array $type, int $timer, int $round, int $gamemode) :void
     {
         if(!$_SESSION){
             $blindtest = $this->getBlindtestMusic($genre, $type, $round);
@@ -27,8 +27,6 @@ class MusicRepository
             $_SESSION['timer'] = $timer;
             $_SESSION['gamemode'] = $gamemode;
         } 
-
-        return $_SESSION['blindtest'];
     }
 
     public function getBlindtestMusic(array $genres, array $types, int $round) :array
