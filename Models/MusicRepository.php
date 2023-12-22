@@ -19,6 +19,8 @@ class MusicRepository
 
     public function createBlindtest(array $genre, array $type, int $timer, int $round, int $gamemode) :void
     {
+        // session_destroy();
+        // exit;
         if(!$_SESSION){
             $blindtest = $this->getBlindtestMusic($genre, $type, $round);
 
@@ -50,7 +52,7 @@ class MusicRepository
             $intypes[$key] = $type;
         }
 
-        $req = "SELECT * FROM music WHERE idgenre IN ($ingenre) AND idtype IN ($intype) ORDER BY RAND() LIMIT :random";
+        $req = "SELECT * FROM music WHERE idgenre IN ($ingenre) AND idtype IN ($intype) AND file IS NOT NULL ORDER BY RAND() LIMIT :round";
         $pdo = $this->getDatabase()->prepare($req);
 
         foreach($ingenres as $ingenre => $keygenre){
@@ -61,7 +63,7 @@ class MusicRepository
             $pdo->bindValue($intype, $keytype, PDO::PARAM_INT);
         }
 
-        $pdo->bindValue(':random', $round, PDO::PARAM_INT);
+        $pdo->bindValue(':round', $round, PDO::PARAM_INT);
         $pdo->execute();
         return $pdo->fetchAll(PDO::FETCH_ASSOC);
     }

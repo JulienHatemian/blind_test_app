@@ -16,4 +16,14 @@ class TypeRepository
         $pdo->closeCursor();
         return $data;
     }
+
+    public function getTypeById($id){
+        $req = "SELECT * FROM type WHERE idgenre = :idtype";
+        $pdo = $this->getDatabase()->prepare($req);
+        $pdo->bindValue(':idtype', $id, PDO::PARAM_INT);
+        $pdo->execute();
+        $data = $pdo->fetch(PDO::FETCH_ASSOC);
+        $pdo->closeCursor();
+        return $data;
+    }
 }

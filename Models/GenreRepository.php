@@ -16,4 +16,14 @@ class GenreRepository
         $pdo->closeCursor();
         return $data;
     }
+
+    public function getGenreById($id){
+        $req = "SELECT * FROM genre WHERE idgenre = :idgenre";
+        $pdo = $this->getDatabase()->prepare($req);
+        $pdo->bindValue(':idgenre', $id, PDO::PARAM_INT);
+        $pdo->execute();
+        $data = $pdo->fetch(PDO::FETCH_ASSOC);
+        $pdo->closeCursor();
+        return $data;
+    }
 }
