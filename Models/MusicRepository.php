@@ -23,11 +23,12 @@ class MusicRepository
         // exit;
         if(!$_SESSION){
             $blindtest = $this->getBlindtestMusic($genre, $type, $round);
-
-            $_SESSION['blindtest'] = $blindtest;
-            $_SESSION['round'] = $round;
-            $_SESSION['timer'] = $timer;
-            $_SESSION['gamemode'] = $gamemode;
+            var_dump($blindtest);
+            exit;
+            // $_SESSION['blindtest'] = $blindtest;
+            // $_SESSION['round'] = $round;
+            // $_SESSION['timer'] = $timer;
+            // $_SESSION['gamemode'] = $gamemode;
         } 
     }
 
@@ -52,7 +53,8 @@ class MusicRepository
             $intypes[$key] = $type;
         }
 
-        $req = "SELECT * FROM music WHERE idgenre IN ($ingenre) AND idtype IN ($intype) AND file IS NOT NULL ORDER BY RAND() LIMIT :round";
+        // $req = "SELECT * FROM music WHERE idgenre IN ($ingenre) AND idtype IN ($intype) AND file IS NOT NULL ORDER BY RAND() LIMIT :round";
+        $req = "SELECT * FROM music LEFT JOIN serie ON music.idserie = serie.idserie WHERE idgenre IN ($ingenre) AND idtype IN ($intype) ORDER BY RAND() LIMIT :round";
         $pdo = $this->getDatabase()->prepare($req);
 
         foreach($ingenres as $ingenre => $keygenre){
