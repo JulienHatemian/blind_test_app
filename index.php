@@ -41,7 +41,7 @@ try{
                 header("Location: " . URL . 'gameconfig');
             }
             break;
-        default: throw new RuntimeException("La page n'existe pas");
+        default: throw new RuntimeException("The page doesn't exist.");
     }
 }catch(Exception $e){
     $mainController->errorPage($e->getMessage());
