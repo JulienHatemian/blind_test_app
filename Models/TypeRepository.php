@@ -18,7 +18,7 @@ class TypeRepository
     }
 
     public function getTypeById($id){
-        $req = "SELECT * FROM type WHERE idgenre = :idtype";
+        $req = "SELECT * FROM type WHERE idtype = :idtype";
         $pdo = $this->getDatabase()->prepare($req);
         $pdo->bindValue(':idtype', $id, PDO::PARAM_INT);
         $pdo->execute();

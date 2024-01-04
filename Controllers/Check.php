@@ -26,15 +26,15 @@ class Check
 
     public function checkConfig(array $genres, array $types, int $gamemode, int $rounds, int $timer):bool
     {
-        if(empty($genres) || empty($types)){
+        if(empty($genres) || empty($types) || empty($gamemode) || empty($rounds) || empty($timer)){
             Toolbox::addAlertMessage(
-                "Please, choose at least 1 genre & 1 type.",
+                "Complete the data needed.",
                 Toolbox::RED_COLOR
             );
         }else{
             if(array_search(false, array_map('is_numeric', $genres)) !== false || array_search(false, array_map('is_numeric', $types)) !== false){
                 Toolbox::addAlertMessage(
-                    "Please, choose a valid genre and type.",
+                    "Choose a valid genre and type.",
                     Toolbox::RED_COLOR
                 );
             }
@@ -60,16 +60,23 @@ class Check
             }
 
             if(count($this->gamemoderepository->getGamemodeById($gamemode)) == 0){
-                if(count($this->typerepository->getTypeById($type)) == 0){
                     Toolbox::addAlertMessage(
-                        "One or more type do not exist.",
+                        "That gamemode doesn't exist.",
                         Toolbox::RED_COLOR
                     );
-                    break;
-                }
             }
 
-            
+            if(!is_int($rounds) || !is_int($timer)){
+                Toolbox::addAlertMessage(
+                    "Choose an integer for the timer and round.",
+                    Toolbox::RED_COLOR
+                );
+            }elseif(($rounds < 1 && $rounds > 30) && ($timer < 1 && $timer > 30)){
+                Toolbox::addAlertMessage(
+                    "Round and timer value must be between 1 et 30.",
+                    Toolbox::RED_COLOR
+                );
+            }
         }
 
         if(isset($_SESSION['alert'])){
