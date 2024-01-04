@@ -25,10 +25,6 @@ class Check
     }
     public function checkConfig(array $genres, array $types, int $gamemode, int $rounds, int $timer)
     {
-        // var_dump($types);
-        // var_dump(array_search(false, array_map('is_numeric', $types)));
-        // var_dump($genres);
-        // exit;
         if(empty($genres) || empty($types)){
             Toolbox::addAlertMessage(
                 "Please, choose at least 1 genre & 1 type.",
