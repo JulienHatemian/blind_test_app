@@ -53,6 +53,8 @@ class MusicRepository
 
         $pdo->bindValue(':round', $round, PDO::PARAM_INT);
         $pdo->execute();
-        return $pdo->fetchAll(PDO::FETCH_ASSOC);
+        $data = $pdo->fetchAll(PDO::FETCH_ASSOC);
+        $pdo->closeCursor();
+        return $data;
     }
 }

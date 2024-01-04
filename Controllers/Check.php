@@ -23,7 +23,8 @@ class Check
         $this->typerepository = new TypeRepository();
         $this->gamemoderepository = new GamemodeRepository();
     }
-    public function checkConfig(array $genres, array $types, int $gamemode, int $rounds, int $timer)
+
+    public function checkConfig(array $genres, array $types, int $gamemode, int $rounds, int $timer):bool
     {
         if(empty($genres) || empty($types)){
             Toolbox::addAlertMessage(
@@ -57,6 +58,18 @@ class Check
                     break;
                 }
             }
+
+            if(count($this->gamemoderepository->getGamemodeById($gamemode)) == 0){
+                if(count($this->typerepository->getTypeById($type)) == 0){
+                    Toolbox::addAlertMessage(
+                        "One or more type do not exist.",
+                        Toolbox::RED_COLOR
+                    );
+                    break;
+                }
+            }
+
+            
         }
 
         if(isset($_SESSION['alert'])){
