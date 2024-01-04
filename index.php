@@ -45,8 +45,6 @@ try{
             }else{
                 header("Location: " . URL . 'gameconfig');
             }
-
-            exit;
             break;
         default: throw new RuntimeException("The page doesn't exist.");
     }

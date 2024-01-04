@@ -18,7 +18,7 @@ class Check
             );
         }
 
-        if(count($_SESSION['alert']) > 0){
+        if(isset($_SESSION['alert'])){
             return false;
         }
 
