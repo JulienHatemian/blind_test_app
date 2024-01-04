@@ -51,9 +51,17 @@ class Check
                     break;
                 }
             }
-        }
 
-        // foreach()
+            foreach($types as $type){
+                if(count($this->typerepository->getTypeById($type)) == 0){
+                    Toolbox::addAlertMessage(
+                        "One or more type do not exist.",
+                        Toolbox::RED_COLOR
+                    );
+                    break;
+                }
+            }
+        }
 
         if(isset($_SESSION['alert'])){
             return false;
