@@ -34,16 +34,24 @@ try{
         case "gameconfig": $blindtestController->gameconfig();
             break;
         case "blindtest":
-            if(!isset($_POST['genre'], $_POST['type'], $_POST['gamemode'], $_POST['timer'])){
+            if(!isset($_POST['genre'], $_POST['type'], $_POST['gamemode'], $_POST['timer'], $_POST['rounds'])){
                 Toolbox::addAlertMessage(
                     "Please, define valid value for your blindtest.",
                     Toolbox::RED_COLOR
                 );
                 header("Location: " . URL . 'gameconfig');
-            }elseif($checkController->checkConfig($_POST['genre'], $_POST['type'], $_POST['gamemode']) === true){
-                $blindtestController->blindtest();
             }else{
-                header("Location: " . URL . 'gameconfig');
+                $genre = Security::secureArray($_POST['genre']);
+                $type = Security::secureArray($_POST['type']);
+                $gamemode = Security::secuteHTML($_POST['gamemode']);
+                $rounds = Security::secuteHTML($_POST['rounds']);
+                $timer = Security::secuteHTML($_POST['timer']);
+
+                if($checkController->checkConfig($genre, $type, $gamemode, $rounds, $timer) === true){
+                    $blindtestController->blindtest();
+                }else{
+                    header("Location: " . URL . 'gameconfig');
+                }
             }
             break;
         default: throw new RuntimeException("The page doesn't exist.");

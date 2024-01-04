@@ -64,8 +64,7 @@ class BlindtestController
             "views" => "views/blindtest.view.php",
             "template" => "views/partials/template.php",
             "page_css" => ['style.css', 'blindtest.css'],
-            "blindtest" => $blindtest,
-            // "blindtest_data" => $post
+            "blindtest" => $blindtest
         ];
 
         $this->generatePage($data_page);

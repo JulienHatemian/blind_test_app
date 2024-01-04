@@ -8,4 +8,13 @@ class Security
     {
         return htmlentities($data);
     }
+
+    public static function secureArray($array):array
+    {
+        $result = array();
+        foreach($array as $data){
+            $result[] = htmlentities($data);
+        }
+        return $result;
+    }
 }
