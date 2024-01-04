@@ -4,12 +4,10 @@ namespace Blindtest\Controllers;
 use Blindtest\Repository\GenreRepository;
 use Blindtest\Repository\TypeRepository;
 use Blindtest\Repository\GamemodeRepository;
-use Blindtest\Controllers\Security;
 
 require_once(__DIR__ . '/../Models/GenreRepository.php');
 require_once(__DIR__ . '/../Models/TypeRepository.php');
 require_once(__DIR__ . '/../Models/GamemodeRepository.php');
-require_once(__DIR__ . '/../Controllers/Security.php');
 
 class Check
 {
