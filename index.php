@@ -3,6 +3,7 @@ use Blindtest\Controllers\MainController;
 use Blindtest\Controllers\BlindtestController;
 use Blindtest\Controllers\Toolbox;
 use Blindtest\Controllers\Security;
+use Blindtest\Controllers\Check;
 
 session_start();
 
@@ -13,9 +14,11 @@ require_once 'Controllers/MainController.controller.php';
 require_once 'Controllers/BlindtestController.controller.php';
 require_once 'Controllers/Security.php';
 require_once 'Controllers/Toolbox.class.php';
+require_once 'Controllers/Check.php';
 
 $mainController = new MainController();
 $blindtestController = new BlindtestController();
+$checkController = new Check();
 
 try{
     if(empty($_GET['page'])){
@@ -31,29 +34,19 @@ try{
         case "gameconfig": $blindtestController->gameconfig();
             break;
         case "blindtest":
-            if(empty($_POST['genre']) || empty($_POST['type'])){
+            if(!isset($_POST['genre'], $_POST['type'], $_POST['gamemode'], $_POST['timer'])){
                 Toolbox::addAlertMessage(
-                    "Please, choose at least 1 genre & 1 type.",
+                    "Please, define valid value for your blindtest.",
                     Toolbox::RED_COLOR
                 );
-            }
-            elseif(array_search(false, array_map('is_numeric', $_POST['genre'])) != false || array_search(false, array_map('is_numeric', $_POST['type'])) != false){
-                Toolbox::addAlertMessage(
-                    "Please, choose a valid genre and type.",
-                    Toolbox::RED_COLOR
-                );
+                header("Location: " . URL . 'gameconfig');
+            }elseif($checkController->checkConfig($_POST['genre'], $_POST['type'], $_POST['gamemode']) === true){
+                $blindtestController->blindtest();
+            }else{
+                header("Location: " . URL . 'gameconfig');
             }
 
             exit;
-            // if(!empty($_POST['genre']) && !empty($_POST['type'])){
-            //     $blindtestController->blindtest();
-            // } else{
-            //     Toolbox::addAlertMessage(
-            //         "Please, choose at least 1 genre & 1 type.",
-            //         Toolbox::RED_COLOR
-            //     );
-            //     header("Location: " . URL . 'gameconfig');
-            // }
             break;
         default: throw new RuntimeException("The page doesn't exist.");
     }
