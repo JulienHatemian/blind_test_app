@@ -71,7 +71,9 @@ class Check
                     "Choose an integer for the timer and round.",
                     Toolbox::RED_COLOR
                 );
-            }elseif(($rounds < 1 && $rounds > 30) && ($timer < 1 && $timer > 30)){
+            }
+            
+            if(($rounds < 1 || $rounds > 30) || ($timer < 1 || $timer > 30)){
                 Toolbox::addAlertMessage(
                     "Round and timer value must be between 1 et 30.",
                     Toolbox::RED_COLOR
