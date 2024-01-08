@@ -38,9 +38,9 @@ class BlindtestService
         // session_destroy();
         // exit;
         if(!$_SESSION){
-            $blindtest = $this->musicrepository->getBlindtestMusic($genre, $type, $round);
-            var_dump($blindtest);
-            exit;
+            // $blindtest = $this->musicrepository->getBlindtestMusic($genre, $type, $round);
+            // var_dump($blindtest);
+            // exit;
             // $_SESSION['blindtest'] = $blindtest;
             // $_SESSION['round'] = $round;
             // $_SESSION['timer'] = $timer;

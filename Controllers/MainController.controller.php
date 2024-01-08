@@ -24,7 +24,7 @@ class MainController{
             "views" => "views/homepage.view.php",
             "template" => "views/partials/template.php",
             "page_css" => ['style.css'],
-            "page_javascript" => ['script.js'],
+            "page_javascript" => ['script.js']
         ];
         $this->generatePage($data_page);
     }
