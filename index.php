@@ -34,7 +34,7 @@ try{
         case "gameconfig": $blindtestController->gameconfig();
             break;
         case "blindtest":
-            if(!isset($_SESSION)){
+            if(!isset($_SESSION['blindtest'])){
                 header("Location: " . URL . 'gameconfig');
             }
             if(!isset($_POST['genre'], $_POST['type'], $_POST['gamemode'], $_POST['timer'], $_POST['rounds'])){
