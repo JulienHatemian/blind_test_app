@@ -4,14 +4,12 @@ namespace Blindtest\Controllers;
 use Blindtest\Repository\GenreRepository;
 use Blindtest\Repository\TypeRepository;
 use Blindtest\Repository\GamemodeRepository;
-use Blindtest\Repository\MusicRepository;
 use Blindtest\Services\BlindtestService;
 
 require_once("MainController.controller.php");
 require_once(__DIR__ . '/../Models/GenreRepository.php');
 require_once(__DIR__ . '/../Models/TypeRepository.php');
 require_once(__DIR__ . '/../Models/GamemodeRepository.php');
-require_once(__DIR__ . '/../Models/MusicRepository.php');
 require_once(__DIR__ . '/../Service/BlindtestService.php');
 
 class BlindtestController
@@ -20,7 +18,6 @@ class BlindtestController
     private GenreRepository $genreRepository;
     private TypeRepository $typeRepository;
     private GamemodeRepository $gamemodeRepository;
-    private MusicRepository $musicRepository;
     private BlindtestService $blindtestservice;
 
     public function __construct()
@@ -28,7 +25,6 @@ class BlindtestController
         $this->genreRepository = new GenreRepository();
         $this->typeRepository = new TypeRepository();
         $this->gamemodeRepository = new GamemodeRepository();
-        $this->musicRepository = new MusicRepository();
         $this->blindtestservice = new BlindtestService();
     }
 

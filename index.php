@@ -6,7 +6,7 @@ use Blindtest\Controllers\Security;
 use Blindtest\Controllers\Check;
 
 session_start();
-// session_destroy();
+
 define('URL', str_replace('index.php', '', (isset($_SERVER['HTTPS']) ? 'https' : 'http') . 
     '://' . $_SERVER['HTTP_HOST'] . $_SERVER['PHP_SELF'] ));
 
@@ -30,8 +30,14 @@ try{
 
     switch($page){
         case "homepage": $mainController->homepage();
+        if(Security::blindtestOngoing() === true){
+            session_destroy();
+        }
             break;
         case "gameconfig": $blindtestController->gameconfig();
+            if(Security::blindtestOngoing() === true){
+                session_destroy();
+            }
             break;
         case "blindtest":
             if(!isset($_POST['genre'], $_POST['type'], $_POST['gamemode'], $_POST['timer'], $_POST['rounds'])){
