@@ -1,13 +1,13 @@
-function ajaxRequest(url, method, callback){
+function ajaxRequest(url, method, param, callback){
     let xhr = new XMLHttpRequest();
-    let data = 'test';
+
     xhr.onreadystatechange = function(){
         if(xhr.readyState === 4 && xhr.status === 200){
-            callback(xhr.responseText);
+            callback(JSON.parse(xhr.responseText));
         }
     }
 
     xhr.open(method, url, true);
     xhr.setRequestHeader('Content-type', 'application/json')
-    xhr.send(JSON.stringify(data));
+    xhr.send(JSON.stringify(param));
 }

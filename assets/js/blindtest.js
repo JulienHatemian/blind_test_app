@@ -1,25 +1,29 @@
-let buttons = document.querySelectorAll('[data-params]');
+const buttons = document.querySelectorAll('[data-params]');
 
 buttons.forEach(function(button){
     button.addEventListener('click', function(e){
         let data = button.getAttribute('data-params');
-        console.log(data);
         e.preventDefault();
+        blindtestOptions(data);
     })
 })
 
-function blindtest(){
+function blindtestOptions(param){
     let currentURL = window.location.href;
     let absoluteRootPath = currentURL.substring(0, currentURL.lastIndexOf("/") + 1);
     let url = absoluteRootPath + 'blindtestApi.php';
 
 
-    ajaxRequest(url, 'POST', function(response){
-        console.log(response);
+    ajaxRequest(url, 'POST', param, function(response){
+        console.log(response.disconnected);
     })
 }
 
-function timer(){
+function resetTimer(){
+
+}
+
+function startTimer(){
 
 }
 

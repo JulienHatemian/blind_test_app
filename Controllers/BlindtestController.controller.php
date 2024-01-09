@@ -54,8 +54,7 @@ class BlindtestController
 
     public function blindtest()
     {
-        $post = $_POST;
-        $blindtest = $this->blindtestservice->createBlindtest($post['genre'], $post['type'], $post['timer'], $post['rounds'], $post['gamemode']);
+        $blindtest = $this->blindtestservice->createBlindtest($_POST['genre'], $_POST['type'], $_POST['timer'], $_POST['rounds'], $_POST['gamemode']);
 
         $data_page = [
             "page_description" => "Blindtest.",

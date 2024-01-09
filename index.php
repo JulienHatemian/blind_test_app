@@ -6,7 +6,7 @@ use Blindtest\Controllers\Security;
 use Blindtest\Controllers\Check;
 
 session_start();
-
+// session_destroy();
 define('URL', str_replace('index.php', '', (isset($_SERVER['HTTPS']) ? 'https' : 'http') . 
     '://' . $_SERVER['HTTP_HOST'] . $_SERVER['PHP_SELF'] ));
 
@@ -34,6 +34,9 @@ try{
         case "gameconfig": $blindtestController->gameconfig();
             break;
         case "blindtest":
+            if(!isset($_SESSION)){
+                header("Location: " . URL . 'gameconfig');
+            }
             if(!isset($_POST['genre'], $_POST['type'], $_POST['gamemode'], $_POST['timer'], $_POST['rounds'])){
                 Toolbox::addAlertMessage(
                     "Please, define valid value for your blindtest.",

@@ -4,6 +4,7 @@
     use Blindtest\Services\BlindtestService;
 
     $blindtestservice = new BlindtestService;
+    session_start();
 
     if($_SERVER['REQUEST_METHOD'] === 'POST'){
         $data = json_decode(file_get_contents('php://input'), true);
@@ -19,7 +20,7 @@
                 break;
             case 'quit':
                 session_destroy();
-                echo json_encode(['success' => 'Session disconnect']);
+                echo json_encode(['disconnected' => true]);
                 break;
             default: throw new RuntimeException("No valid command.");
         }
