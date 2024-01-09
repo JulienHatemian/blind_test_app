@@ -39,8 +39,8 @@ class MusicRepository
             $intypes[$key] = $type;
         }
 
-        // $req = "SELECT * FROM music LEFT JOIN serie ON music.idserie = serie.idserie WHERE idgenre IN ($ingenre) AND idtype IN ($intype) AND file IS NOT NULL ORDER BY RAND() LIMIT :round";
-        $req = "SELECT * FROM music LEFT JOIN serie ON music.idserie = serie.idserie WHERE idgenre IN ($ingenre) AND idtype IN ($intype) ORDER BY RAND() LIMIT :round";
+        $req = "SELECT * FROM music LEFT JOIN serie ON music.idserie = serie.idserie WHERE idgenre IN ($ingenre) AND idtype IN ($intype) AND file IS NOT NULL ORDER BY RAND() LIMIT :round";
+        // $req = "SELECT * FROM music LEFT JOIN serie ON music.idserie = serie.idserie WHERE idgenre IN ($ingenre) AND idtype IN ($intype) ORDER BY RAND() LIMIT :round";
         $pdo = $this->getDatabase()->prepare($req);
 
         foreach($ingenres as $ingenre => $keygenre){

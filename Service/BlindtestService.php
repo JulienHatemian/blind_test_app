@@ -35,16 +35,14 @@ class BlindtestService
 
     public function createBlindtest(array $genre, array $type, int $timer, int $round, int $gamemode) :void
     {
-        // session_destroy();
-        // exit;
         if(!$_SESSION){
-            // $blindtest = $this->musicrepository->getBlindtestMusic($genre, $type, $round);
-            // var_dump($blindtest);
-            // exit;
-            // $_SESSION['blindtest'] = $blindtest;
-            // $_SESSION['round'] = $round;
-            // $_SESSION['timer'] = $timer;
-            // $_SESSION['gamemode'] = $gamemode;
+            $blindtest = $this->musicrepository->getBlindtestMusic($genre, $type, $round);
+
+            $_SESSION['blindtest'] = $blindtest;
+            $_SESSION['round'] = 1;
+            $_SESSION['totalround'] = $round;
+            $_SESSION['timer'] = $timer;
+            $_SESSION['gamemode'] = $gamemode;
         } 
     }
 }
