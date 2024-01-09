@@ -17,4 +17,13 @@ class Security
         }
         return $result;
     }
+
+    public static function blindtestOngoing():bool
+    {
+        if(isset($_SESSION['blindtest'])){
+            return true;
+        }else{
+            return false;
+        }
+    }
 }

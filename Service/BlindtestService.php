@@ -36,7 +36,6 @@ class BlindtestService
     public function createBlindtest(array $genre, array $type, int $timer, int $round, int $gamemode) :void
     {
         if(empty($_SESSION)){
-            // session_start();
             $blindtest = $this->musicrepository->getBlindtestMusic($genre, $type, $round);
 
             $_SESSION['blindtest'] = $blindtest;

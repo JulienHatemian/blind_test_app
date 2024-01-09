@@ -12,9 +12,9 @@ define('URL', str_replace('index.php', '', (isset($_SERVER['HTTPS']) ? 'https' :
 
 require_once 'Controllers/MainController.controller.php';
 require_once 'Controllers/BlindtestController.controller.php';
-require_once 'Controllers/Security.php';
+require_once 'Controllers/Security.class.php';
 require_once 'Controllers/Toolbox.class.php';
-require_once 'Controllers/Check.php';
+require_once 'Controllers/Check.class.php';
 
 $mainController = new MainController();
 $blindtestController = new BlindtestController();
@@ -34,9 +34,6 @@ try{
         case "gameconfig": $blindtestController->gameconfig();
             break;
         case "blindtest":
-            if(!isset($_SESSION['blindtest'])){
-                header("Location: " . URL . 'gameconfig');
-            }
             if(!isset($_POST['genre'], $_POST['type'], $_POST['gamemode'], $_POST['timer'], $_POST['rounds'])){
                 Toolbox::addAlertMessage(
                     "Please, define valid value for your blindtest.",
@@ -55,6 +52,9 @@ try{
                 }else{
                     header("Location: " . URL . 'gameconfig');
                 }
+            }
+            if(Security::blindtestOngoing() === false){
+                header("Location: " . URL . 'gameconfig');
             }
             break;
         default: throw new RuntimeException("The page doesn't exist.");
