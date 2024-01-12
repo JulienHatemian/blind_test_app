@@ -6,6 +6,7 @@
 <button data-params='restart'>Restart</button>
 <button data-params='pause'>Pause</button>
 <button data-params='response'>Response</button>
+<button onclick="startTimer()">Timer</button>
 
 <?php
     var_dump($_SESSION);
