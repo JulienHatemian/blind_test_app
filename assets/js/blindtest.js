@@ -1,6 +1,8 @@
 const buttons = document.querySelectorAll('[data-params]');
 const currentURL = window.location.href;
 const absoluteRootPath = currentURL.substring(0, currentURL.lastIndexOf("/") + 1);
+let interval;
+let timeleft = 0;
 
 buttons.forEach(function(button){
     button.addEventListener('click', function(e){
@@ -53,15 +55,26 @@ function resetTimer(){
 function startTimer(){
     let timer = document.getElementById('timer');
 
-    if(timeleft > 0){
-        let timeleft = parseInt(timer.innerHTML);
-        let interval = setInterval(() => {
-            timeleft--
-            timer.textContent = timeleft;
-            if(timeleft == 0){
-                clearInterval(interval);
-            }
-        }, 1000);
+    if(!interval){
+        timeleft = parseInt(timer.innerHTML);
+
+        if(timeleft > 0){
+            interval = setInterval(() => {
+                timeleft--
+                timer.textContent = timeleft;
+                if(timeleft == 0){
+                    clearInterval(interval);
+                    interval = null;
+                }
+            }, 1000);
+        }
+    }
+}
+
+function pauseTimer(){
+    if(interval){
+        clearInterval(interval);
+        interval = null;
     }
 }
 
