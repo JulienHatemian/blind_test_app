@@ -39,4 +39,21 @@ class MainController{
         ];
         $this->generatePage($data_page);
     }
+
+    public function log($data)
+    {
+        $file = __DIR__ . '/../log.php';
+        ob_flush();
+        ob_start();
+        print_r($data);
+        $param = ob_get_clean();
+        $param = '[' . date('Y-m-d H:i:s') . ']: ' . $param . "\n";
+        $fp = fopen($file, 'a');
+        fwrite($fp, $param);
+        fclose($fp);
+
+        // $fp = fopen($file, 'w');
+        // fwrite($fp, print_r($data));
+        // fclose($fp);
+    }
 }

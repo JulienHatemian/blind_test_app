@@ -1,20 +1,23 @@
 <?php
     require_once __DIR__ . '/Service/BlindtestService.php';
+    require_once __DIR__ . '/Controllers/MainController.controller.php';
 
     use Blindtest\Services\BlindtestService;
+    use Blindtest\Controllers\MainController;
 
     $blindtestservice = new BlindtestService;
+    $maincontroller = new MainController;
     session_start();
-
+    
     if($_SERVER['REQUEST_METHOD'] === 'POST'){
         $data = json_decode(file_get_contents('php://input'), true);
-        // print_r($data);
-        // exit;
+        $maincontroller->log($data);
         switch($data){
             case 'start':
                 // if($blindtestservice->checkTimestampLeft() > 0){
-                    echo json_encode(['success' => true, 'result' => 'test', 'data' => $data]);
+                    
                 // }
+                echo json_encode(['success' => true, 'result' => 'test', 'data' => $data]);
                 break;
             case 'pause':
                 echo json_encode(['success' => true, 'result' => 'test', 'data' => $data]);
@@ -34,5 +37,4 @@
                 break;
             default: throw new RuntimeException("No valid command.");
         }
-        // echo json_encode(['success' => true, 'result' => 'test', 'data' => $data]);
     }

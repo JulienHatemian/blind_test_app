@@ -54,6 +54,9 @@ class BlindtestService
         
         if($totaltime - $timeleft > 0 && $timeleft - $time > 0){
             $_SESSION['timeleft'] = $time;
+            return true;
+        }else{
+            return false;
         }
     }
 }
