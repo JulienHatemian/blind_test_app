@@ -4,10 +4,11 @@
 
 <button data-params='quit'>Quit</button>
 <button data-params='restart'>Restart</button>
-<!-- <button data-params='pause'>Pause</button> -->
-<button onclick="pauseTimer()">Pause</button>
+<!-- <button data-params='pause' onclick="pauseTimer()">Pause</button> -->
+<button data-params='pause'>Pause</button>
 <button data-params='response'>Response</button>
-<button onclick="startTimer()">Timer</button>
+<!-- <button onclick="startTimer()">Timer</button> -->
+<button data-params='start'>Timer</button>
 
 <?php
     var_dump($_SESSION);

@@ -12,6 +12,9 @@
             case 'start':
                 
                 break;
+            case 'pause':
+
+                break;
             case 'next':
                 break;
             case 'response':
