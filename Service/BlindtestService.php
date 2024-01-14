@@ -46,4 +46,14 @@ class BlindtestService
             $_SESSION['gamemode'] = $gamemode;
         } 
     }
+
+    public function checkTimestampLeft(int $time)
+    {
+        $totaltime = $_SESSION['timer'];
+        $timeleft = $_SESSION['timeleft'];
+        
+        if($totaltime - $timeleft > 0 && $timeleft - $time > 0){
+            $_SESSION['timeleft'] = $time;
+        }
+    }
 }

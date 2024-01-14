@@ -6,18 +6,32 @@ let timeleft = 0;
 
 buttons.forEach(function(button){
     button.addEventListener('click', function(e){
-        let data = button.getAttribute('data-params');
-        
+        // let arrayData = {};
+        // let timer = document.getElementById('timer');
+        // let timeleft = parseInt(timer.innerHTML);
+
+        // arrayData['dataParams'] = button.getAttribute('data-params');
+        let dataParams = button.getAttribute('data-params');
+        // arrayData['timer'] = timeleft;
+        // console.log(arrayData.dataParams);
+        // console.log(arrayData.timer);
+        // console.log(dataParams);
         e.preventDefault();
-        if(data != 'quit'){
-            blindtestOptions(data);
+        // return;
+        if(dataParams != 'quit'){
+            if(dataParams === 'timer' || dataParams === 'pause'){
+                let timer = document.getElementById('timer');
+                let timeleft = parseInt(timer.innerHTML);
+            }
+
+            blindtestOptions(dataParams);
         }else{
             let confirmation = window.confirm('Are you sure you want to quit ? You will have to generate a new blindtest.')
             if(confirmation){
-                blindtestOptions(data);
+                blindtestOptions(dataParams);
             }
         }
-        return;
+        // return;
     })
 })
 
@@ -28,22 +42,21 @@ function blindtestOptions(param){
         if(response.disconnected === true){
             window.location.href = absoluteRootPath + 'gameconfig';
         }
+        console.log(response);
     })
 }
 
-function quit(){
-    let h1 = document.querySelector('h1');
+let h1 = document.querySelector('h1');
 
-    h1.addEventListener('click', function(e){
-        let confirmation = window.confirm('Are you sure you want to quit ? You will have to generate a new blindtest.')
+h1.addEventListener('click', function(e){
+    let confirmation = window.confirm('Are you sure you want to quit ? You will have to generate a new blindtest.')
 
-        if(confirmation){
-            window.location.href = absoluteRootPath + 'homepage';
-        }else{
-            e.preventDefault();
-        }
-    })
-}
+    if(confirmation){
+        window.location.href = absoluteRootPath + 'homepage';
+    }else{
+        e.preventDefault();
+    }
+})
 
 function resetTimer(){
 
