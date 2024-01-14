@@ -40,7 +40,7 @@ class BlindtestService
 
             $_SESSION['blindtest'] = $blindtest;
             $_SESSION['round'] = 1;
-            $_SESSION['totalround'] = $round;
+            $_SESSION['totalround'] = count($blindtest);
             $_SESSION['timer'] = $timer;
             $_SESSION['gamemode'] = $gamemode;
         } 

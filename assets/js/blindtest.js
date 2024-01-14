@@ -27,7 +27,6 @@ function blindtestOptions(param){
     let url = absoluteRootPath + 'blindtestApi.php';
 
     ajaxRequest(url, 'POST', param, function(response){
-        console.log(response);
         if(response.disconnected === true){
             window.location.href = absoluteRootPath + 'gameconfig';
         }
