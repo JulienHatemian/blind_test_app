@@ -8,8 +8,6 @@ buttons.forEach(function(button){
     button.addEventListener('click', function(e){
         let data = button.getAttribute('data-params');
         
-        console.log(data);
-
         e.preventDefault();
         if(data != 'quit'){
             blindtestOptions(data);

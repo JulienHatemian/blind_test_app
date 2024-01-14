@@ -23,7 +23,7 @@ class BlindtestService
         $this->musicrepository = new MusicRepository();
     }
 
-    public function playMusic($file, $idgenre, $idtype, $timer){
+    public function getMusicFile($file, $idgenre, $idtype, $timer){
         $genre = $this->genrerepository->getGenreById($idgenre);
         $type = $this->typerepository->getTypeById($idtype);
 
