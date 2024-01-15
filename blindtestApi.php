@@ -1,11 +1,14 @@
 <?php
     require_once __DIR__ . '/Service/BlindtestService.php';
+    require_once __DIR__ . '/Controllers/Security.class.php';
     require_once __DIR__ . '/Controllers/MainController.controller.php';
 
     use Blindtest\Services\BlindtestService;
+    use Blindtest\Controllers\Security;
     use Blindtest\Controllers\MainController;
 
     $blindtestservice = new BlindtestService;
+    $security = new Security;
     $maincontroller = new MainController;
     session_start();
 
@@ -15,6 +18,10 @@
 
         switch($data['dataParams']){
             case 'start':
+                if($_SESSION['blindtest']['timer']['left'] != $data['timeleft']){
+                    $data['timeleft'] = $_SESSION['blindtest']['timer']['left'];
+                }
+
                 if($blindtestservice->checkTimestamp($data['timeleft']) === true && $_SESSION['blindtest']['timer']['left'] > 0){
                     if($data['timeleft'] === 0){
                         $_SESSION['blindtest']['timer']['left'] = (int) 0;
@@ -28,7 +35,13 @@
                 }
                 break;
             case 'pause':
-                echo json_encode(['success' => true, 'result' => 'test', 'data' => $data]);
+                if($blindtestservice->checkTimestamp($data['timeleft']) === true && $data['timeleft'] > 0){
+                    $_SESSION['blindtest']['timer']['left'] = $data['timeleft'];
+                    echo json_encode(['success' => true, 'showresult' => false, 'timeleft' => $_SESSION['blindtest']['timer']['left'], 'input' => $data['dataParams']]);
+                }else{
+                    echo json_encode(['success' => false, 'showresult' => false, 'timeleft' => $_SESSION['blindtest']['timer']['left'], 'input' => $data['dataParams']]);
+                }
+                
                 break;
             case 'next':
                 echo json_encode(['success' => true, 'result' => 'test', 'data' => $data]);
@@ -37,7 +50,8 @@
                 echo json_encode(['success' => true, 'result' => 'test', 'data' => $data]);
                 break;
             case 'restart':
-                echo json_encode(['success' => true, 'result' => 'test', 'data' => $data]);
+                $_SESSION['blindtest']['timer']['left'] = $_SESSION['blindtest']['timer']['config'];
+                echo json_encode(['success' => true, 'showresult' => false, 'timeleft' => $_SESSION['blindtest']['timer']['config'], 'input' => $data['dataParams']]);
                 break;
             case 'quit':
                 session_destroy();

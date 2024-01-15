@@ -27,6 +27,7 @@ buttons.forEach(function(button){
 
 function blindtestOptions(param){
     let url = absoluteRootPath + 'blindtestApi.php';
+    let timer = document.getElementById('timer');
 
     ajaxRequest(url, 'POST', param, function(response){
         if(response.disconnected === true){
@@ -36,9 +37,16 @@ function blindtestOptions(param){
         if(response.success === true){
             switch(response.input){
                 case 'start':
-                    let timer = document.getElementById('timer');
                     timer.innerHTML = response.timeleft;
                     startTimer();
+                    break;
+                case 'restart':
+                    timer.innerHTML = response.timeleft;
+                    pauseTimer();
+                    break;
+                case 'pause':
+                    timer.innerHTML = response.timeleft;
+                    pauseTimer();
                     break;
                 default:
                     console.log('Wrong input');
