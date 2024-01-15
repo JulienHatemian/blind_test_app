@@ -12,12 +12,20 @@
     if($_SERVER['REQUEST_METHOD'] === 'POST'){
         $data = json_decode(file_get_contents('php://input'), true);
         $maincontroller->log($data);
-        switch($data){
+
+        switch($data['dataParams']){
             case 'start':
-                if($blindtestservice->checkTimestampLeft(12) > 0){
-                    
+                if($blindtestservice->checkTimestamp($data['timeleft']) === true && $_SESSION['blindtest']['timer']['left'] > 0){
+                    if($data['timeleft'] === 0){
+                        $_SESSION['blindtest']['timer']['left'] = (int) 0;
+                        echo json_encode(['success' => false, 'showresult' => true, 'timeleft' => $_SESSION['blindtest']['timer']['left'], 'input' => $data['dataParams']]);
+                    }else{
+                        $_SESSION['blindtest']['timer']['left'] = $data['timeleft'];
+                        echo json_encode(['success' => true, 'showresult' => false, 'timeleft' => $_SESSION['blindtest']['timer']['left'], 'input' => $data['dataParams']]);
+                    }
+                }else{
+                    echo json_encode(['success' => false, 'showresult' => false, 'timeleft' => $_SESSION['blindtest']['timer']['left'], 'input' => $data['dataParams']]);
                 }
-                echo json_encode(['success' => true, 'result' => 'test', 'data' => $data]);
                 break;
             case 'pause':
                 echo json_encode(['success' => true, 'result' => 'test', 'data' => $data]);
@@ -25,7 +33,7 @@
             case 'next':
                 echo json_encode(['success' => true, 'result' => 'test', 'data' => $data]);
                 break;
-            case 'response':
+            case 'result':
                 echo json_encode(['success' => true, 'result' => 'test', 'data' => $data]);
                 break;
             case 'restart':

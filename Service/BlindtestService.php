@@ -46,20 +46,19 @@ class BlindtestService
             $_SESSION['blindtest']['rounds']['total'] = count($blindtest);
             $_SESSION['blindtest']['rounds']['actual'] = 1;
             $_SESSION['blindtest']['timer']['config'] = $timer;
-            $_SESSION['blindtest']['timer']['previous'] = $timer;
+            // $_SESSION['blindtest']['timer']['previous'] = $timer;
             $_SESSION['blindtest']['timer']['left'] = $timer;
             $_SESSION['blindtest']['gamemode'] = $gamemode;
         } 
     }
 
-    public function checkTimestampLeft(int $time)
+    public function checkTimestamp(int $time) :bool
     {
         $totaltime = $_SESSION['blindtest']['timer']['config'];
         $timeleft = $_SESSION['blindtest']['timer']['left'];
 
-        $bool = ($totaltime - $timeleft >= 0 && $timeleft - $time > 0) ? true : false;
+        $bool = ($totaltime - $timeleft >= 0 && $timeleft - $time >= 0 && $timeleft <= $totaltime && $timeleft >= $time) ? true : false;
         $this->maincontroller->log($bool);
-        // exit;
         return $bool;
     }
 }

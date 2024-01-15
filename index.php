@@ -30,9 +30,9 @@ try{
 
     switch($page){
         case "homepage": $mainController->homepage();
-        if(Security::blindtestOngoing() === true){
-            session_destroy();
-        }
+            if(Security::blindtestOngoing() === true){
+                session_destroy();
+            }
             break;
         case "gameconfig": $blindtestController->gameconfig();
             if(Security::blindtestOngoing() === true){

@@ -6,29 +6,20 @@ let timeleft = 0;
 
 buttons.forEach(function(button){
     button.addEventListener('click', function(e){
-        // let arrayData = {};
-        // let timer = document.getElementById('timer');
-        // let timeleft = parseInt(timer.innerHTML);
+        let obj = {};
+        let timer = document.getElementById('timer');
+        let timeleft = parseInt(timer.innerHTML);
 
-        // arrayData['dataParams'] = button.getAttribute('data-params');
-        let dataParams = button.getAttribute('data-params');
-        // arrayData['timer'] = timeleft;
-        // console.log(arrayData.dataParams);
-        // console.log(arrayData.timer);
-        // console.log(dataParams);
+        obj['dataParams'] = button.getAttribute('data-params');
+        obj['timeleft'] = timeleft;
         e.preventDefault();
-        // return;
-        if(dataParams != 'quit'){
-            if(dataParams === 'timer' || dataParams === 'pause'){
-                let timer = document.getElementById('timer');
-                let timeleft = parseInt(timer.innerHTML);
-            }
 
-            blindtestOptions(dataParams);
+        if(obj.dataParams != 'quit'){
+            blindtestOptions(obj);
         }else{
             let confirmation = window.confirm('Are you sure you want to quit ? You will have to generate a new blindtest.')
             if(confirmation){
-                blindtestOptions(dataParams);
+                blindtestOptions(obj);
             }
         }
     })
@@ -42,6 +33,17 @@ function blindtestOptions(param){
             window.location.href = absoluteRootPath + 'gameconfig';
         }
         console.log(response);
+        if(response.success === true){
+            switch(response.input){
+                case 'start':
+                    let timer = document.getElementById('timer');
+                    timer.innerHTML = response.timeleft;
+                    startTimer();
+                    break;
+                default:
+                    console.log('Wrong input');
+            }
+        }
     })
 }
 
