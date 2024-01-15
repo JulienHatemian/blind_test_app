@@ -5,22 +5,26 @@ namespace Blindtest\Services;
 require_once(__DIR__ . '/../Models/GenreRepository.php');
 require_once(__DIR__ . '/../Models/TypeRepository.php');
 require_once(__DIR__ . '/../Models/MusicRepository.php');
+require_once(__DIR__ . '/../Controllers/MainController.controller.php');
 
 use Blindtest\Repository\GenreRepository;
 use Blindtest\Repository\TypeRepository;
 use Blindtest\Repository\MusicRepository;
+use Blindtest\Controllers\MainController;
 
 class BlindtestService
 {
     private GenreRepository $genrerepository;
     private TypeRepository $typerepository;
     private MusicRepository $musicrepository;
+    private MainController $maincontroller;
 
     public function __construct()
     {
         $this->genrerepository = new GenreRepository();
         $this->typerepository = new TypeRepository();
         $this->musicrepository = new MusicRepository();
+        $this->maincontroller = new MainController();
     }
 
     public function getMusicFile($file, $idgenre, $idtype, $timer){
@@ -38,25 +42,24 @@ class BlindtestService
         if(empty($_SESSION)){
             $blindtest = $this->musicrepository->getBlindtestMusic($genre, $type, $round);
 
-            $_SESSION['blindtest'] = $blindtest;
-            $_SESSION['round'] = 1;
-            $_SESSION['totalround'] = count($blindtest);
-            $_SESSION['timer'] = $timer;
-            $_SESSION['timeleft'] = $timer;
-            $_SESSION['gamemode'] = $gamemode;
+            $_SESSION['blindtest']['music'] = $blindtest;
+            $_SESSION['blindtest']['rounds']['total'] = count($blindtest);
+            $_SESSION['blindtest']['rounds']['actual'] = 1;
+            $_SESSION['blindtest']['timer']['config'] = $timer;
+            $_SESSION['blindtest']['timer']['previous'] = $timer;
+            $_SESSION['blindtest']['timer']['left'] = $timer;
+            $_SESSION['blindtest']['gamemode'] = $gamemode;
         } 
     }
 
     public function checkTimestampLeft(int $time)
     {
-        $totaltime = $_SESSION['timer'];
-        $timeleft = $_SESSION['timeleft'];
-        
-        if($totaltime - $timeleft > 0 && $timeleft - $time > 0){
-            $_SESSION['timeleft'] = $time;
-            return true;
-        }else{
-            return false;
-        }
+        $totaltime = $_SESSION['blindtest']['timer']['config'];
+        $timeleft = $_SESSION['blindtest']['timer']['left'];
+
+        $bool = ($totaltime - $timeleft >= 0 && $timeleft - $time > 0) ? true : false;
+        $this->maincontroller->log($bool);
+        // exit;
+        return $bool;
     }
 }

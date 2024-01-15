@@ -8,15 +8,15 @@
     $blindtestservice = new BlindtestService;
     $maincontroller = new MainController;
     session_start();
-    
+
     if($_SERVER['REQUEST_METHOD'] === 'POST'){
         $data = json_decode(file_get_contents('php://input'), true);
         $maincontroller->log($data);
         switch($data){
             case 'start':
-                // if($blindtestservice->checkTimestampLeft() > 0){
+                if($blindtestservice->checkTimestampLeft(12) > 0){
                     
-                // }
+                }
                 echo json_encode(['success' => true, 'result' => 'test', 'data' => $data]);
                 break;
             case 'pause':

@@ -42,18 +42,17 @@ class MainController{
 
     public function log($data)
     {
-        $file = __DIR__ . '/../log.php';
-        ob_flush();
-        ob_start();
-        print_r($data);
-        $param = ob_get_clean();
-        $param = '[' . date('Y-m-d H:i:s') . ']: ' . $param . "\n";
-        $fp = fopen($file, 'a');
-        fwrite($fp, $param);
-        fclose($fp);
+        ini_set('xdebug.var_display_max_depth', 10);
+        ini_set('xdebug.var_display_max_children', 256);
+        ini_set('xdebug.var_display_max_data', 1024);
 
-        // $fp = fopen($file, 'w');
-        // fwrite($fp, print_r($data));
-        // fclose($fp);
+        $file = __DIR__ . '/../log.php';
+        ob_start();
+        var_dump($data);
+        $param = ob_get_clean();
+        $cleanparam = strip_tags($param);
+        $date = '[' . date('Y-m-d H:i:s') . ']: ';
+        $dump = $date . $cleanparam . "\n";
+        error_log($dump, 3, $file);
     }
 }

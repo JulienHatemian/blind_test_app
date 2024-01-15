@@ -31,7 +31,6 @@ buttons.forEach(function(button){
                 blindtestOptions(dataParams);
             }
         }
-        // return;
     })
 })
 
