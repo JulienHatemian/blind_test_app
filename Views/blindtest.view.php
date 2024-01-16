@@ -6,9 +6,10 @@
 <button data-params='restart'>Restart</button>
 <button data-params='previous'>Previous</button>
 <button data-params='pause'>Pause</button>
-<button data-params='start'>Start</button>
+<button data-params='play'>Play</button>
 <button data-params='next'>Next</button>
 <button data-params='result'>Result</button>
+<button data-params='start'>Start</button>
 
 <?php
     var_dump($_SESSION);

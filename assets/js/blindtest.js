@@ -2,7 +2,6 @@ const buttons = document.querySelectorAll('[data-params]');
 const currentURL = window.location.href;
 const absoluteRootPath = currentURL.substring(0, currentURL.lastIndexOf("/") + 1);
 let interval;
-let timeleft = 0;
 
 buttons.forEach(function(button){
     button.addEventListener('click', function(e){
@@ -37,6 +36,8 @@ function blindtestOptions(param){
         if(response.success === true){
             switch(response.input){
                 case 'start':
+                    break;
+                case 'play':
                     timer.innerHTML = response.timeleft;
                     startTimer();
                     break;

@@ -9,21 +9,21 @@ class Security
         return htmlentities($data);
     }
 
-    public static function secureArray($array):array
+    public static function secureArray(array $array):array
     {
         $result = array();
-        foreach($array as $data){
-            $result[] = htmlentities($data);
+        foreach($array as $key => $data){
+            $newkey = htmlentities($key);
+            $newdata = htmlentities($data);
+            (is_numeric($newdata) === true) ? $newdata = (int) $newdata : false;
+            
+            $result[$newkey] = $newdata;
         }
         return $result;
     }
 
     public static function blindtestOngoing():bool
     {
-        if(isset($_SESSION['blindtest'])){
-            return true;
-        }else{
-            return false;
-        }
+        return (isset($_SESSION['blindtest'])) ? true : false;
     }
 }
