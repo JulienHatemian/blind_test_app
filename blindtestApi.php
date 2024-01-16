@@ -1,15 +1,18 @@
 <?php
     require_once __DIR__ . '/Service/BlindtestService.php';
+    require_once __DIR__ . '/Service/MusicService.php';
     require_once __DIR__ . '/Controllers/Security.class.php';
     require_once __DIR__ . '/Controllers/MainController.controller.php';
 
     use Blindtest\Services\BlindtestService;
+    use Blindtest\Services\MusicService;
     use Blindtest\Controllers\Security;
     use Blindtest\Controllers\MainController;
 
-    $blindtestservice = new BlindtestService;
-    $security = new Security;
-    $maincontroller = new MainController;
+    $blindtestservice = new BlindtestService();
+    $musicservice = new MusicService();
+    $security = new Security();
+    $maincontroller = new MainController();
     session_start();
 
     if($_SERVER['REQUEST_METHOD'] === 'POST'){
@@ -19,10 +22,16 @@
         switch($data['dataParams']){
             case 'start':
                 if(isset($_SESSION['blindtest']) === true && $_SESSION['blindtest']['rounds']['actual'] === 1){
-                    echo json_encode(['success' => true, 'showresult' => false, 'timeleft' => $_SESSION['blindtest']['timer']['config'], 'input' => $data['dataParams'], 'data' => $_SESSION['blindtest']['music'][0]]);
+                    $musicstart = $_SESSION['blindtest']['music'][0];
+                    $file = $musicstart['file'];
+                    $genre = $musicstart['idgenre'];
+                    $type = $musicstart['idtype'];
+                    $timer = $_SESSION['blindtest']['timer']['config'];
+
+                    $result = $musicservice->getMusicFile($file, $genre, $type, $timer);
+                    echo json_encode(['success' => true, 'showresult' => false, 'timeleft' => $_SESSION['blindtest']['timer']['config'], 'input' => $data['dataParams'], 'data' => $_SESSION['blindtest']['music'][0], 'audio' => $result]);
                 }else{
                     echo json_encode(['success' => false, 'showresult' => false, 'timeleft' => NULL, 'input' => $data['dataParams'], 'data' => NULL]);
-
                 }
                 break;
             case 'play':
