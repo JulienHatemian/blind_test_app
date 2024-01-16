@@ -42,6 +42,7 @@ try{
         case "blindtest":
             if(isset($_SESSION['blindtest'])){
                 $_SESSION['blindtest']['timer']['left'] = $_SESSION['blindtest']['timer']['config'];
+                $_SESSION['blindtest']['timer']['ongoing'] = false;
             }
             if(!isset($_POST['genre'], $_POST['type'], $_POST['gamemode'], $_POST['timer'], $_POST['rounds'])){
                 Toolbox::addAlertMessage(

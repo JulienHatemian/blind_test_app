@@ -48,6 +48,12 @@ function blindtestOptions(param){
                     timer.innerHTML = response.timeleft;
                     pauseTimer();
                     break;
+                case 'result':
+
+                    break;
+                case 'endtimer':
+                    timer.innerHTML = response.timeleft;
+                    break;
                 default:
                     console.log('Wrong input');
             }
@@ -82,6 +88,14 @@ function startTimer(){
                 timeleft--
                 timer.textContent = timeleft;
                 if(timeleft == 0){
+                    let obj = {};
+                    let timer = document.getElementById('timer');
+                    let timeleft = parseInt(timer.innerHTML);
+
+                    obj['dataParams'] = 'endtimer';
+                    obj['timeleft'] = timeleft;
+
+                    blindtestOptions(obj);
                     clearInterval(interval);
                     interval = null;
                 }

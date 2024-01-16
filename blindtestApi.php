@@ -14,28 +14,29 @@
 
     if($_SERVER['REQUEST_METHOD'] === 'POST'){
         $data = json_decode(file_get_contents('php://input'), true);
-
+        // $maincontroller->log($data);
+        // exit;
         switch($data['dataParams']){
             case 'start':
                 if($_SESSION['blindtest']['timer']['ongoing'] === false){
                     if($_SESSION['blindtest']['timer']['left'] != $data['timeleft']){
                         $data['timeleft'] = $_SESSION['blindtest']['timer']['left'];
                     }
-
-                    if($blindtestservice->checkTimestamp($data['timeleft']) === true && $_SESSION['blindtest']['timer']['left'] > 0){
+                    if($blindtestservice->checkTimestamp($data['timeleft']) === true){
                         if($data['timeleft'] === 0){
-                            $_SESSION['blindtest']['timer']['left'] = (int) 0;
-                            echo json_encode(['success' => false, 'showresult' => true, 'timeleft' => $_SESSION['blindtest']['timer']['left'], 'input' => $data['dataParams']]);
+                            $_SESSION['blindtest']['timer']['left'] = $_SESSION['blindtest']['timer']['config'];
+                            $_SESSION['blindtest']['timer']['ongoing'] = true;
+                            echo json_encode(['success' => true, 'showresult' => false, 'timeleft' => $_SESSION['blindtest']['timer']['left'], 'input' => $data['dataParams'], 'data' => NULL]);
                         }else{
                             $_SESSION['blindtest']['timer']['left'] = $data['timeleft'];
                             $_SESSION['blindtest']['timer']['ongoing'] = true;
-                            echo json_encode(['success' => true, 'showresult' => false, 'timeleft' => $_SESSION['blindtest']['timer']['left'], 'input' => $data['dataParams']]);
+                            echo json_encode(['success' => true, 'showresult' => false, 'timeleft' => $_SESSION['blindtest']['timer']['left'], 'input' => $data['dataParams'], 'data' => NULL]);
                         }
                     }else{
-                        echo json_encode(['success' => false, 'showresult' => false, 'timeleft' => $_SESSION['blindtest']['timer']['left'], 'input' => $data['dataParams']]);
+                        echo json_encode(['success' => false, 'showresult' => false, 'timeleft' => $_SESSION['blindtest']['timer']['left'], 'input' => $data['dataParams'], 'data' => NULL]);
                     }
                 }else{
-                    echo json_encode(['success' => false, 'showresult' => false, 'timeleft' => $_SESSION['blindtest']['timer']['left'], 'input' => $data['dataParams']]);
+                    echo json_encode(['success' => false, 'showresult' => false, 'timeleft' => $_SESSION['blindtest']['timer']['left'], 'input' => $data['dataParams'], 'data' => NULL]);
                 }
                 break;
             case 'pause':
@@ -43,12 +44,12 @@
                     if($blindtestservice->checkTimestamp($data['timeleft']) === true && $data['timeleft'] > 0){
                         $_SESSION['blindtest']['timer']['left'] = $data['timeleft'];
                         $_SESSION['blindtest']['timer']['ongoing'] = false;
-                        echo json_encode(['success' => true, 'showresult' => false, 'timeleft' => $_SESSION['blindtest']['timer']['left'], 'input' => $data['dataParams']]);
+                        echo json_encode(['success' => true, 'showresult' => false, 'timeleft' => $_SESSION['blindtest']['timer']['left'], 'input' => $data['dataParams'], 'data' => NULL]);
                     }else{
-                        echo json_encode(['success' => false, 'showresult' => false, 'timeleft' => $_SESSION['blindtest']['timer']['left'], 'input' => $data['dataParams']]);
+                        echo json_encode(['success' => false, 'showresult' => false, 'timeleft' => $_SESSION['blindtest']['timer']['left'], 'input' => $data['dataParams'], 'data' => NULL]);
                     }
                 }else{
-                    echo json_encode(['success' => false, 'showresult' => false, 'timeleft' => $_SESSION['blindtest']['timer']['left'], 'input' => $data['dataParams']]);
+                    echo json_encode(['success' => false, 'showresult' => false, 'timeleft' => $_SESSION['blindtest']['timer']['left'], 'input' => $data['dataParams'], 'data' => NULL]);
                 }
                 
                 break;
@@ -56,11 +57,19 @@
                 echo json_encode(['success' => true, 'result' => 'test', 'data' => $data]);
                 break;
             case 'result':
-                echo json_encode(['success' => true, 'result' => 'test', 'data' => $data]);
+                echo json_encode(['success' => true, 'showresult' => true, 'timeleft' => $_SESSION['blindtest']['timer']['left'], 'input' => $data['dataParams'], 'data' => NULL]);
                 break;
             case 'restart':
                 $_SESSION['blindtest']['timer']['left'] = $_SESSION['blindtest']['timer']['config'];
-                echo json_encode(['success' => true, 'showresult' => false, 'timeleft' => $_SESSION['blindtest']['timer']['config'], 'input' => $data['dataParams']]);
+                $_SESSION['blindtest']['timer']['ongoing'] = false;
+                echo json_encode(['success' => true, 'showresult' => false, 'timeleft' => $_SESSION['blindtest']['timer']['config'], 'input' => $data['dataParams'], 'data' => NULL]);
+                break;
+            case 'endtimer':
+                if($data['timeleft'] === 0){
+                    $_SESSION['blindtest']['timer']['left'] = $data['timeleft'];
+                    $_SESSION['blindtest']['timer']['ongoing'] = false;
+                    echo json_encode(['success' => true, 'showresult' => false, 'timeleft' => $_SESSION['blindtest']['timer']['left'], 'input' => $data['dataParams'], 'data' => NULL]);
+                }
                 break;
             case 'quit':
                 session_destroy();
