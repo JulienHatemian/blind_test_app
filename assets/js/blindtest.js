@@ -83,7 +83,10 @@ function blindtestOptions(param){
                 //     }    
                 //     break;
                 case 'result':
-
+                    if(response.data){
+                        showResult(response.data);
+                        // console.log(response.data);
+                    }
                     break;
                 case 'endtimer':
                     timer.innerHTML = response.timeleft;
@@ -95,9 +98,91 @@ function blindtestOptions(param){
     })
 }
 
+function showResult(data){
+    let main = document.getElementById('mainContent');
+    let round = document.getElementById('round');
+    let result = document.getElementById('resultContainer');
 
-function resetTimer(){
+    if(!result){
+        let resultContainer = document.createElement('div');
+        resultContainer.id = 'resultContainer';
 
+        if(data.title){
+            let title = document.createElement('p');
+            let span = document.createElement('span');
+            title.id = 'title';
+
+            span.classList.add('resultElement');
+            span.textContent = 'Title:';
+            
+            title.appendChild(span);
+            title.appendChild(document.createTextNode(' ' + data.title));
+
+            resultContainer.appendChild(title);
+        }
+
+        if(data.group){
+            let group = document.createElement('p');
+            let span = document.createElement('span');
+            group.id = 'year';
+            
+            span.classList.add('resultElement');
+            span.textContent = 'Group:';
+            
+            group.appendChild(span);
+            group.appendChild(document.createTextNode(' ' + data.group));
+
+            resultContainer.appendChild(group);
+        }
+
+        if(data.year){
+            let year = document.createElement('p');
+            let span = document.createElement('span');
+            year.id = 'year';
+            
+            span.classList.add('resultElement');
+            span.textContent = 'Year:';
+            
+            year.appendChild(span);
+            year.appendChild(document.createTextNode(' ' + data.year));
+
+            resultContainer.appendChild(year);
+        }
+
+        if(data.number){
+            let number = document.createElement('p');
+            let span = document.createElement('span');
+            number.id = 'season';
+            
+            span.classList.add('resultElement');
+            span.textContent = 'Season:';
+            
+            number.appendChild(span);
+            number.appendChild(document.createTextNode(' ' + data.number));
+
+            resultContainer.appendChild(number);
+        }
+
+        if(data.studio){
+            let studio = document.createElement('p');
+            let span = document.createElement('span');
+            studio.id = 'studio';
+            
+            span.classList.add('resultElement');
+            span.textContent = 'Studio:';
+            
+            studio.appendChild(span);
+            studio.appendChild(document.createTextNode(' ' + data.studio));
+
+            resultContainer.appendChild(studio);
+        }
+
+        main.insertBefore(resultContainer, round);
+
+        if(data.link){
+            insertVisualResult(data.link);
+        }
+    }
 }
 
 function startTimer(){
@@ -133,18 +218,6 @@ function startTimer(){
 //         interval = null;
 //     }
 // }
-
-// function skip(){
-
-// }
-
-function getResponse(){
-
-}
-
-function pauseMusic(){
-
-}
 
 function playAudio(param){
     let player = new Audio();

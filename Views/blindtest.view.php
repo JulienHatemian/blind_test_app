@@ -12,5 +12,5 @@
 <button data-params='start' id="start">Start</button>
 
 <?php
-    var_dump($_SESSION);
+    var_dump($_SESSION['blindtest']);
 ?>

@@ -46,9 +46,7 @@ class MusicService
                 $randomStartingPoint = rand($starttime, $endtime);
                 $maxTime = min($_SESSION['blindtest']['timer']['left'], $totaltime - $randomStartingPoint);
             }
-    
-            // $maxTime = min($_SESSION['blindtest']['timer']['config'], $totaltime - $randomStartingPoint);
-        
+            
             $result = [
                 'file' => $audiofile,
                 'official_link' => "/assets/mp3/" . $genre['filepath'] . '/' . $type['filepath'] . '/' . $file . '.mp3',

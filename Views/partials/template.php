@@ -11,7 +11,7 @@
     <?php endif; ?>
 </head>
 <body>
-    <main>
+    <main id="mainContent">
         <?php require_once("Views/partials/header.php") ?>
         <?php
             if(!empty($_SESSION['alert'])) {

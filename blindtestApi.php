@@ -91,7 +91,12 @@
                 echo json_encode(['success' => true, 'result' => 'test', 'data' => $data]);
                 break;
             case 'result':
-                echo json_encode(['success' => true, 'showresult' => true, 'timeleft' => $_SESSION['blindtest']['timer']['left'], 'input' => $data['dataParams'], 'data' => NULL]);
+                // if($showresult === false){
+                    $roundactual = $_SESSION['blindtest']['rounds']['actual'];
+                    echo json_encode(['success' => true, 'showresult' => true, 'timeleft' => $_SESSION['blindtest']['timer']['config'], 'input' => $data['dataParams'], 'data' => $_SESSION['blindtest']['music'][$roundactual - 1], 'audio' => NULL]);    
+                // }else{
+                    // echo json_encode(['success' => false, 'showresult' => false, 'timeleft' => $_SESSION['blindtest']['timer']['config'], 'input' => $data['dataParams'], 'data' => NULL, 'audio' => NULL]);    
+                // }
                 break;
             case 'endtimer':
                 if($data['timeleft'] == 0){
