@@ -33,6 +33,7 @@ class BlindtestService
             $blindtest = $this->musicrepository->getBlindtestMusic($genre, $type, $round);
 
             $_SESSION['blindtest']['music'] = $blindtest;
+            $_SESSION['blindtest']['music']['sample'] = NULL;
             $_SESSION['blindtest']['rounds']['total'] = count($blindtest);
             $_SESSION['blindtest']['rounds']['actual'] = 1;
             $_SESSION['blindtest']['timer']['config'] = $timer;

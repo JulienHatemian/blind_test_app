@@ -1,10 +1,13 @@
-const buttons = document.querySelectorAll('[data-params]');
 const currentURL = window.location.href;
 const absoluteRootPath = currentURL.substring(0, currentURL.lastIndexOf("/") + 1);
 let interval;
+let audioPlayer;
 let isPlaying = false;
+let player;
 
 document.addEventListener('DOMContentLoaded', function(){
+    let buttons = document.querySelectorAll('[data-params]');
+
     buttons.forEach(function(button){
         button.addEventListener('click', function(e){
             let obj = {};
@@ -48,26 +51,37 @@ function blindtestOptions(param){
             window.location.href = absoluteRootPath + 'gameconfig';
         }
         console.log(response);
-        console.log(isPlaying);
         if(response.success === true){
             switch(response.input){
                 case 'start':
                     if(response.audio && isPlaying === false){
+                        timer.innerHTML = response.timeleft;
+                        isPlaying = true;
+                        startTimer();
                         playAudio(response.audio);
                     }
                     break;
                 case 'play':
-                    timer.innerHTML = response.timeleft;
-                    startTimer();
+                    if(response.audio && isPlaying === false){
+                        timer.innerHTML = response.timeleft;
+                        isPlaying = true;
+                        startTimer();
+                        playAudio(response.audio);
+                    }
                     break;
                 case 'restart':
                     timer.innerHTML = response.timeleft;
                     pauseTimer();
                     break;
-                case 'pause':
-                    timer.innerHTML = response.timeleft;
-                    pauseTimer();
-                    break;
+                // case 'pause':
+                //     if(response.audio && isPlaying === true){
+                //         timer.innerHTML = response.timeleft;
+                //         pauseTimer();
+                //         // player;
+                //         playAudio(response.audio);
+                //         isPlaying = false;
+                //     }    
+                //     break;
                 case 'result':
 
                     break;
@@ -113,16 +127,16 @@ function startTimer(){
     }
 }
 
-function pauseTimer(){
-    if(interval){
-        clearInterval(interval);
-        interval = null;
-    }
-}
+// function pauseTimer(){
+//     if(interval){
+//         clearInterval(interval);
+//         interval = null;
+//     }
+// }
 
-function skip(){
+// function skip(){
 
-}
+// }
 
 function getResponse(){
 
@@ -133,27 +147,27 @@ function pauseMusic(){
 }
 
 function playAudio(param){
-    let audioplayer = new Audio();
-    audioplayer.volume = 0.3;
-    audioplayer.addEventListener('canplaythrough', function(){
+    let player = new Audio();
+    player.volume = 0.3;
+        
+    player.addEventListener('canplaythrough', function(){
         isPlaying = true;
-        audioplayer.play;
+        player.play();
     })
 
-    audioplayer.addEventListener('ended', function(){
+    player.addEventListener('ended', function(){
         isPlaying = false
-        audioplayer.pause();
+        player.pause();
     });
 
-    audioplayer.currentTime = param.start;
+    player.currentTime = param.start;
     let endPlay = param.start + param.duration;
-    audioplayer.src = absoluteRootPath + param.official_link;
+    player.src = absoluteRootPath + param.official_link;
 
-    audioplayer.addEventListener('timeupdate', function(){
-        if(audioplayer.currentTime >= endPlay){
+    player.addEventListener('timeupdate', function(){
+        if(player.currentTime >= endPlay){
             isPlaying = false
-            audioplayer.pause();
+            player.pause();
         }
     })
-    audioplayer.play();
 }

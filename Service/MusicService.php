@@ -34,7 +34,7 @@ class MusicService
 
         if(strpos($typemime, 'audio/') !== false){
             $totaltime = $this->getMP3Duration($audiofile);
-            // $totaltime = 90;
+            $totaltime = $totaltime - 3;
             $starttime = 0;
             $endtime = $totaltime;
     
