@@ -27,32 +27,31 @@ class MusicService
         $genre = $this->genrerepository->getGenreById($idgenre);
         $type = $this->typerepository->getTypeById($idtype);
 
-        $audiofile = __DIR__ . "/../assets/mp3/" . $genre['libelle'] . '/' . $type['libelle'] . '/' . $file . '.mp3';
+        $audiofile = __DIR__ . "/../assets/mp3/" . $genre['filepath'] . '/' . $type['filepath'] . '/' . $file . '.mp3';
         $finfo = finfo_open(FILEINFO_MIME_TYPE);
         $typemime = finfo_file($finfo, $audiofile);
         finfo_close($finfo);
 
         if(strpos($typemime, 'audio/') !== false){
-            // $totaltime = $this->getMP3Duration($audiofile);
-            $totaltime = 90;
+            $totaltime = $this->getMP3Duration($audiofile);
+            // $totaltime = 90;
             $starttime = 0;
             $endtime = $totaltime;
     
             if($_SESSION['blindtest']['timer']['config'] < $totaltime){
                 $randomStartingPoint = rand($starttime, $endtime - $_SESSION['blindtest']['timer']['config']);
+                $maxTime = min($_SESSION['blindtest']['timer']['config'], $totaltime - $randomStartingPoint);
             }else{
                 $_SESSION['blindtest']['timer']['left'] = $totaltime;
                 $randomStartingPoint = rand($starttime, $endtime);
+                $maxTime = min($_SESSION['blindtest']['timer']['left'], $totaltime - $randomStartingPoint);
             }
     
-            $maxTime = min($_SESSION['blindtest']['timer']['config'], $totaltime - $randomStartingPoint);
-
-            // $randomStartingPoint = rand(0, filesize($audiofile)/2);
-            // $maxTime = min($timer, filesize($audiofile) - $randomStartingPoint);
+            // $maxTime = min($_SESSION['blindtest']['timer']['config'], $totaltime - $randomStartingPoint);
         
             $result = [
                 'file' => $audiofile,
-                'official_link' => "/assets/mp3/" . $genre['libelle'] . '/' . $type['libelle'] . '/' . $file . '.mp3',
+                'official_link' => "/assets/mp3/" . $genre['filepath'] . '/' . $type['filepath'] . '/' . $file . '.mp3',
                 'start' => $randomStartingPoint,
                 'duration' => $maxTime,
                 'mime' => $typemime
@@ -64,10 +63,10 @@ class MusicService
         }
     }
 
-    // public function getMP3Duration($audiofile){
-    //     $ratio = 16000; //bytespersec
-    //     $file_size = filesize($audiofile);
-    //     $duration = ($file_size / $ratio);
-    //     return round($duration);
-    // }
+    public function getMP3Duration($audiofile){
+        $ratio = 16000; //BytesPerSec
+        $file_size = filesize($audiofile);
+        $duration = ($file_size / $ratio);
+        return round($duration);
+    }
 }

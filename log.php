@@ -77,3 +77,12 @@ array (size=5)
       'year' =&gt; string '2023' (length=4)
       'studio' =&gt; string 'C2C' (length=3)
 
+[2024-01-16 18:46:55]: 
+C:\wamp64\www\blind-test-app\Controllers\MainController.controller.php:51:float 76.6589375
+
+[2024-01-16 18:47:53]: 
+C:\wamp64\www\blind-test-app\Controllers\MainController.controller.php:51:float 90.0509375
+
+[2024-01-16 18:48:26]: 
+C:\wamp64\www\blind-test-app\Controllers\MainController.controller.php:51:float 90.1229375
+

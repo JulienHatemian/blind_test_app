@@ -15,13 +15,13 @@
     $maincontroller = new MainController();
     session_start();
 
-    if($_SERVER['REQUEST_METHOD'] === 'POST'){
+    if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_SESSION['blindtest']) === true){
         $data = json_decode(file_get_contents('php://input'), true);
         $data = Security::secureArray($data);
 
         switch($data['dataParams']){
             case 'start':
-                if(isset($_SESSION['blindtest']) === true && $_SESSION['blindtest']['rounds']['actual'] === 1){
+                if($_SESSION['blindtest']['rounds']['actual'] === 1){
                     $musicstart = $_SESSION['blindtest']['music'][0];
                     $file = $musicstart['file'];
                     $genre = $musicstart['idgenre'];

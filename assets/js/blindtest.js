@@ -2,10 +2,9 @@ const buttons = document.querySelectorAll('[data-params]');
 const currentURL = window.location.href;
 const absoluteRootPath = currentURL.substring(0, currentURL.lastIndexOf("/") + 1);
 let interval;
+let isPlaying = false;
 
 document.addEventListener('DOMContentLoaded', function(){
-    let isPlaying = false;
-
     buttons.forEach(function(button){
         button.addEventListener('click', function(e){
             let obj = {};
@@ -49,12 +48,12 @@ function blindtestOptions(param){
             window.location.href = absoluteRootPath + 'gameconfig';
         }
         console.log(response);
+        console.log(isPlaying);
         if(response.success === true){
             switch(response.input){
                 case 'start':
-                    if(response.audio){
+                    if(response.audio && isPlaying === false){
                         playAudio(response.audio);
-                        console.log('test');
                     }
                     break;
                 case 'play':
@@ -134,29 +133,27 @@ function pauseMusic(){
 }
 
 function playAudio(param){
-    let player = new Audio();
-    player.volume = 0.3;
-    player.addEventListener('canplaythrough', function(){
-        console.log("Audio ready");
-        player.play;
+    let audioplayer = new Audio();
+    audioplayer.volume = 0.3;
+    audioplayer.addEventListener('canplaythrough', function(){
+        isPlaying = true;
+        audioplayer.play;
     })
 
-    player.addEventListener('ended', function(){
-        player.pause();
+    audioplayer.addEventListener('ended', function(){
+        isPlaying = false
+        audioplayer.pause();
     });
 
-    player.currentTime = param.start;
+    audioplayer.currentTime = param.start;
     let endPlay = param.start + param.duration;
-    console.log(endPlay);
-    console.log(player.currentTime);
+    audioplayer.src = absoluteRootPath + param.official_link;
 
-    player.src = absoluteRootPath + param.official_link;
-
-    player.addEventListener('timeupdate', function(){
-        if(player.currentTime >= endPlay){
-            player.pause();
+    audioplayer.addEventListener('timeupdate', function(){
+        if(audioplayer.currentTime >= endPlay){
+            isPlaying = false
+            audioplayer.pause();
         }
     })
-
-    player.play();
+    audioplayer.play();
 }
