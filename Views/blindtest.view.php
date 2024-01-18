@@ -1,5 +1,5 @@
 <h1>BLINDTEST EN COURS</h1>
-<div id="round"><?= $_SESSION['blindtest']['rounds']['actual'] . '/' . $_SESSION['blindtest']['rounds']['total']  ?></div>
+<div id="round"><span id="actualround"><?= $_SESSION['blindtest']['rounds']['actual'] . '</span> / ' . $_SESSION['blindtest']['rounds']['total']  ?></div>
 <div id="timer"><?= $_SESSION['blindtest']['timer']['left'] ?></div>
 
 <button data-params='quit' id="quit">Quit</button>

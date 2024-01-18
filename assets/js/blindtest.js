@@ -45,6 +45,7 @@ document.addEventListener('DOMContentLoaded', function(){
 function blindtestOptions(param){
     let url = absoluteRootPath + 'blindtestApi.php';
     let timer = document.getElementById('timer');
+    let actualround = document.getElementById('actualround');
 
     ajaxRequest(url, 'POST', param, function(response){
         if(response.disconnected === true){
@@ -69,9 +70,26 @@ function blindtestOptions(param){
                         playAudio(response.audio);
                     }
                     break;
+                case 'next':
+                    if(response.success && isPlaying === false && response.round){
+                        actualround.innerHTML = response.round;
+                        timer.innerHTML = response.timeleft;
+                        removeResult()
+                    }
+                    break;
+                case 'previous':
+                    if(response.success && isPlaying === false && response.round){
+                        actualround.innerHTML = response.round;
+                        timer.innerHTML = response.timeleft;
+                        removeResult()
+                    }
+                    break;
                 case 'restart':
-                    timer.innerHTML = response.timeleft;
-                    pauseTimer();
+                    if(response.success && isPlaying === false && response.round){
+                        timer.innerHTML = response.timeleft;
+                        actualround.innerHTML = response.round;
+                        removeResult()
+                    }
                     break;
                 case 'result':
                     if(response.data && isPlaying === false){
@@ -93,6 +111,7 @@ function showResult(data){
     let main = document.getElementById('mainContent');
     let round = document.getElementById('round');
     let result = document.getElementById('resultContainer');
+    let resultVideo = document.getElementById('resultVideo');
 
     if(!result){
         let resultContainer = document.createElement('div');
@@ -173,6 +192,18 @@ function showResult(data){
         if(data.link){
             insertVisualResult(data.file);
         }
+    }else{
+        result.remove();
+        resultVideo.remove();
+    }
+}
+
+function removeResult(){
+    let result = document.getElementById('resultContainer');
+    let resultVideo = document.getElementById('resultVideo');
+    if(result){
+        result.remove();
+        resultVideo.remove();    
     }
 }
 
@@ -180,7 +211,8 @@ function insertVisualResult(idyoutube){
     let main = document.getElementById('mainContent');
     let result = document.getElementById('resultContainer')
     let iframe = document.createElement('iframe');
-
+    
+    iframe.id = 'resultVideo';
     iframe.width = 560;
     iframe.height = 315;
     iframe.src = 'https://www.youtube.com/embed/' + idyoutube + '?autoplay=1&controls=0&rel=0&modestbranding=1';
@@ -216,13 +248,6 @@ function startTimer(){
         }
     }
 }
-
-// function pauseTimer(){
-//     if(interval){
-//         clearInterval(interval);
-//         interval = null;
-//     }
-// }
 
 function playAudio(param){
     let player = new Audio();
