@@ -73,23 +73,14 @@ function blindtestOptions(param){
                     timer.innerHTML = response.timeleft;
                     pauseTimer();
                     break;
-                // case 'pause':
-                //     if(response.audio && isPlaying === true){
-                //         timer.innerHTML = response.timeleft;
-                //         pauseTimer();
-                //         // player;
-                //         playAudio(response.audio);
-                //         isPlaying = false;
-                //     }    
-                //     break;
                 case 'result':
-                    if(response.data){
+                    if(response.data && isPlaying === false){
                         showResult(response.data);
-                        // console.log(response.data);
                     }
                     break;
                 case 'endtimer':
                     timer.innerHTML = response.timeleft;
+                    isPlaying = false;
                     break;
                 default:
                     console.log('Wrong input');
@@ -180,9 +171,23 @@ function showResult(data){
         main.insertBefore(resultContainer, round);
 
         if(data.link){
-            insertVisualResult(data.link);
+            insertVisualResult(data.file);
         }
     }
+}
+
+function insertVisualResult(idyoutube){
+    let main = document.getElementById('mainContent');
+    let result = document.getElementById('resultContainer')
+    let iframe = document.createElement('iframe');
+
+    iframe.width = 560;
+    iframe.height = 315;
+    iframe.src = 'https://www.youtube.com/embed/' + idyoutube + '?autoplay=1&controls=0&rel=0&modestbranding=1';
+    iframe.style.border = '0';
+    iframe.allowFullscreen = false;
+
+    main.insertBefore(iframe, result);
 }
 
 function startTimer(){
