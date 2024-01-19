@@ -21,23 +21,6 @@
         $roundConfig = $_SESSION['blindtest']['rounds']['config'];
 
         switch($data['dataParams']){
-            // case 'start':
-            //     if($_SESSION['blindtest']['rounds']['actual'] === 1 && $_SESSION['blindtest']['music']['sample'] === NULL && $_SESSION['blindtest']['timer']['ongoing'] === false && is_int($data['timeleft'])){
-            //         $musicstart = $_SESSION['blindtest']['music'][0];
-            //         $file = $musicstart['file'];
-            //         $genre = $musicstart['idgenre'];
-            //         $type = $musicstart['idtype'];
-            //         $timer = $_SESSION['blindtest']['timer']['config'];
-                    
-            //         $result = $musicservice->getMusicFile($file, $genre, $type, $timer);
-            //         $_SESSION['blindtest']['music']['sample'] = $result;
-            //         $_SESSION['blindtest']['timer']['ongoing'] = true;
-
-            //         echo json_encode(['success' => true, 'roundconfig' => $roundConfig, 'roundactual' => NULL, 'timeleft' => $_SESSION['blindtest']['timer']['config'], 'input' => $data['dataParams'], 'data' => $_SESSION['blindtest']['music'][0], 'audio' => $_SESSION['blindtest']['music']['sample']]);
-            //     }else{
-            //         echo json_encode(['success' => false, 'roundconfig' => $roundConfig, 'roundactual' => NULL, 'timeleft' => $_SESSION, 'input' => $data['dataParams'], 'data' => NULL]);
-            //     }
-            //     break;
             case 'play':
                 if($_SESSION['blindtest']['timer']['ongoing'] === false && is_int($data['timeleft'])){
                     if($_SESSION['blindtest']['timer']['left'] != $data['timeleft']){
@@ -53,9 +36,6 @@
                         
                         $result = $musicservice->getMusicFile($file, $genre, $type, $timer);
                         $_SESSION['blindtest']['music']['sample'] = $result;
-                        // $_SESSION['blindtest']['timer']['ongoing'] = true;
-    
-                        // echo json_encode(['success' => true, 'roundconfig' => $roundConfig, 'roundactual' => NULL, 'timeleft' => $_SESSION['blindtest']['timer']['config'], 'input' => $data['dataParams'], 'data' => $_SESSION['blindtest']['music'][0], 'audio' => $_SESSION['blindtest']['music']['sample']]);
                     }
 
                     if($blindtestservice->checkTimestamp($data['timeleft']) === true){
