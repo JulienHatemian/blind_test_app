@@ -7,7 +7,6 @@ let player;
 
 document.addEventListener('DOMContentLoaded', function(){
     let buttons = document.querySelectorAll('[data-params]');
-
     buttons.forEach(function(button){
         button.addEventListener('click', function(e){
             let obj = {};
@@ -30,7 +29,6 @@ document.addEventListener('DOMContentLoaded', function(){
     })
 
     let h1 = document.querySelector('h1');
-
     h1.addEventListener('click', function(e){
         let confirmation = window.confirm('Are you sure you want to quit ? You will have to generate a new blindtest.')
 
@@ -46,6 +44,11 @@ function blindtestOptions(param){
     let url = absoluteRootPath + 'blindtestApi.php';
     let timer = document.getElementById('timer');
     let actualround = document.getElementById('actualround');
+    let play = document.getElementById('play');
+    let next = document.getElementById('next');
+    let previous = document.getElementById('previous');
+    let restart = document.getElementById('restart');
+    let result = document.getElementById('result');
 
     ajaxRequest(url, 'POST', param, function(response){
         if(response.disconnected === true){
@@ -68,27 +71,44 @@ function blindtestOptions(param){
                         isPlaying = true;
                         startTimer();
                         playAudio(response.audio);
+                        play.disabled = true
+                        next.disabled = true
+                        previous.disabled = true
+                        restart.disabled = true
+                        result.disabled = true
                     }
                     break;
                 case 'next':
-                    if(response.success && isPlaying === false && response.round){
-                        actualround.innerHTML = response.round;
+                    if(response.success && isPlaying === false && response.roundactual){
+                        actualround.innerHTML = response.roundactual;
                         timer.innerHTML = response.timeleft;
-                        removeResult()
+                        removeResult();
+
+                        if(response.roundconfig === response.roundactual){
+                            next.disabled = true;
+                        }
+                        previous.disabled = false;
+                        result.disabled = true;
                     }
                     break;
                 case 'previous':
-                    if(response.success && isPlaying === false && response.round){
-                        actualround.innerHTML = response.round;
+                    if(response.success && isPlaying === false && response.roundactual){
+                        actualround.innerHTML = response.roundactual;
                         timer.innerHTML = response.timeleft;
                         removeResult()
+                        if(response.roundactual <= 1){
+                            previous.disabled = true;
+                        }
+                        result.disabled = true;
                     }
                     break;
                 case 'restart':
-                    if(response.success && isPlaying === false && response.round){
+                    if(response.success && isPlaying === false && response.roundactual){
                         timer.innerHTML = response.timeleft;
-                        actualround.innerHTML = response.round;
-                        removeResult()
+                        actualround.innerHTML = response.roundactual;
+                        removeResult();
+                        blindtestState = 'ongoing';
+                        localStorage.setItem('blindtestState', blindtestState);
                     }
                     break;
                 case 'result':
@@ -99,6 +119,17 @@ function blindtestOptions(param){
                 case 'endtimer':
                     timer.innerHTML = response.timeleft;
                     isPlaying = false;
+                    if(response.roundactual > 1){
+                        previous.disabled = false;
+                    }
+
+                    if(response.roundconfig != response.roundactual){
+                        next.disabled = false;
+                    }
+
+                    play.disabled = false;
+                    result.disabled = false;
+                    restart.disabled = false;
                     break;
                 default:
                     console.log('Wrong input');

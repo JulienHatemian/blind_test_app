@@ -34,7 +34,7 @@ class BlindtestService
 
             $_SESSION['blindtest']['music'] = $blindtest;
             $_SESSION['blindtest']['music']['sample'] = NULL;
-            $_SESSION['blindtest']['rounds']['total'] = count($blindtest);
+            $_SESSION['blindtest']['rounds']['config'] = count($blindtest);
             $_SESSION['blindtest']['rounds']['actual'] = 1;
             $_SESSION['blindtest']['timer']['config'] = $timer;
             $_SESSION['blindtest']['timer']['left'] = $timer;

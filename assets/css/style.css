@@ -59,3 +59,7 @@ body{
 .button-type:first-child{
     margin-bottom: 10px;
 }
+
+.hidden{
+    display: none;
+}
