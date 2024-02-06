@@ -4,6 +4,7 @@ namespace Blindtest\Database;
 use Blindtest\database\dbConfig;
 use Exception;
 use PDO;
+
 require_once 'dbConfig.php';
 
 class dbConnection

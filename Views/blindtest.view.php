@@ -8,4 +8,3 @@
 <button data-params='play' id="play">Play</button>
 <button data-params='next' id="next">Next</button>
 <button data-params='result' id="result">Result</button>
-<!-- <button data-params='start' id="start">Start</button> -->

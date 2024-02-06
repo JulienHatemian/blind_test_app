@@ -1,5 +1,4 @@
 <?php
-
 namespace Blindtest\Controllers;
 
 class Security

@@ -1,30 +1,17 @@
 <?php
-
 namespace Blindtest\Services;
 
-// require_once(__DIR__ . '/../Models/GenreRepository.php');
-// require_once(__DIR__ . '/../Models/TypeRepository.php');
-require_once(__DIR__ . '/../Models/MusicRepository.php');
-// require_once(__DIR__ . '/../Controllers/MainController.controller.php');
-
-// use Blindtest\Repository\GenreRepository;
-// use Blindtest\Repository\TypeRepository;
 use Blindtest\Repository\MusicRepository;
-// use Blindtest\Controllers\MainController;
+
+require_once(__DIR__ . '/../Models/MusicRepository.php');
 
 class BlindtestService
 {
-    // private GenreRepository $genrerepository;
-    // private TypeRepository $typerepository;
     private MusicRepository $musicrepository;
-    // private MainController $maincontroller;
 
     public function __construct()
     {
-        // $this->genrerepository = new GenreRepository();
-        // $this->typerepository = new TypeRepository();
         $this->musicrepository = new MusicRepository();
-        // $this->maincontroller = new MainController();
     }
 
     public function createBlindtest(array $genre, array $type, int $timer, int $round, int $gamemode) :void

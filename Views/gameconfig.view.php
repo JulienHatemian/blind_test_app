@@ -35,7 +35,7 @@
         <legend>Game mode:</legend>
         <?php if(isset($gamemodes)) :?>
         <?php foreach($gamemodes as $gamemode): ?>
-            <button type="submit" class="button-type" name="gamemode" value="<?= $gamemode['idgamemode'] ?>"><?= $gamemode['libelle'] ?></button>
+            <button type="submit" class="button-type" name="gamemode" value="<?= $gamemode['idgamemode'] ?>" <?php echo(($gamemode['active'] == 0) ? 'disabled' : '') ?>><?= $gamemode['libelle'] ?></button>
         <?php endforeach; endif; ?>
     </div>
 </form>

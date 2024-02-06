@@ -1,6 +1,6 @@
 <?php
-
 namespace Blindtest\Controllers;
+
 class Toolbox
 {
     public const RED_COLOR = "alert-danger";

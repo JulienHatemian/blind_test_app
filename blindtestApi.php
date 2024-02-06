@@ -1,23 +1,19 @@
 <?php
-    require_once __DIR__ . '/Service/BlindtestService.php';
-    require_once __DIR__ . '/Service/MusicService.php';
-    require_once __DIR__ . '/Controllers/Security.class.php';
-    require_once __DIR__ . '/Controllers/MainController.controller.php';
-
     use Blindtest\Services\BlindtestService;
     use Blindtest\Services\MusicService;
     use Blindtest\Controllers\Security;
-    use Blindtest\Controllers\MainController;
+
+    require_once __DIR__ . '/Service/BlindtestService.php';
+    require_once __DIR__ . '/Service/MusicService.php';
+    require_once __DIR__ . '/Controllers/Security.class.php';
 
     $blindtestservice = new BlindtestService();
     $musicservice = new MusicService();
     $security = new Security();
-    $maincontroller = new MainController();
     session_start();
 
     if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_SESSION['blindtest']) === true){
         $data = json_decode(file_get_contents('php://input'), true);
-        $maincontroller->log($_SESSION['blindtest']);
         $data = Security::secureArray($data);
         $roundConfig = $_SESSION['blindtest']['rounds']['config'];
 

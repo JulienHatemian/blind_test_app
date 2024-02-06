@@ -65,7 +65,6 @@ function blindtestOptions(param){
         if(response.disconnected === true){
             window.location.href = absoluteRootPath + 'gameconfig';
         }
-        console.log(response);
         if(response.success === true){
             switch(response.input){
                 case 'play':
@@ -122,10 +121,13 @@ function showResult(data){
     let main = document.getElementById('mainContent');
     let round = document.getElementById('round');
     let result = document.getElementById('resultContainer');
+    let title = document.getElementById('libelleContainer');
     let resultVideo = document.getElementById('resultVideo');
 
     if(!result){
         let resultContainer = document.createElement('div');
+        let libelleContainer = document.createElement('div');
+        libelleContainer.id = 'libelleContainer';
         resultContainer.id = 'resultContainer';
 
         if(data.title){
@@ -198,22 +200,33 @@ function showResult(data){
             resultContainer.appendChild(studio);
         }
 
+        if(data.libelle){
+            let libelle = document.createElement('p');
+            libelle.textContent = data.libelle;
+
+            libelleContainer.appendChild(libelle);
+        }
+
         main.insertBefore(resultContainer, round);
+        main.insertBefore(libelleContainer, round);
 
         if(data.link){
             insertVisualResult(data.file);
         }
     }else{
         result.remove();
+        title.remove();
         resultVideo.remove();
     }
 }
 
 function removeResult(){
     let result = document.getElementById('resultContainer');
+    let title = document.getElementById('libelleContainer');
     let resultVideo = document.getElementById('resultVideo');
     if(result){
         result.remove();
+        title.remove();
         resultVideo.remove();    
     }
 }
@@ -262,7 +275,7 @@ function startTimer(){
 
 function playAudio(param){
     let player = new Audio();
-    player.volume = 0.3;
+    player.volume = 0.4;
         
     player.addEventListener('canplaythrough', function(){
         isPlaying = true;

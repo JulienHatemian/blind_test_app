@@ -5,6 +5,7 @@ use Blindtest\Repository\MainRepository;
 use PDO;
 
 require_once(__DIR__ . '/../Models/MainRepository.php');
+
 class GenreRepository
     extends MainRepository
 {

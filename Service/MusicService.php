@@ -1,26 +1,21 @@
 <?php
-
 namespace Blindtest\Services;
-
-require_once(__DIR__ . '/../Models/GenreRepository.php');
-require_once(__DIR__ . '/../Models/TypeRepository.php');
-require_once(__DIR__ . '/../Controllers/MainController.controller.php');
 
 use Blindtest\Repository\GenreRepository;
 use Blindtest\Repository\TypeRepository;
-use Blindtest\Controllers\MainController;
+
+require_once(__DIR__ . '/../Models/GenreRepository.php');
+require_once(__DIR__ . '/../Models/TypeRepository.php');
 
 class MusicService
 {
     private GenreRepository $genrerepository;
     private TypeRepository $typerepository;
-    private MainController $maincontroller;
 
     public function __construct()
     {
         $this->genrerepository = new GenreRepository();
         $this->typerepository = new TypeRepository();
-        $this->maincontroller = new MainController();
     }
 
     public function getMusicFile($file, $idgenre, $idtype, $timer){

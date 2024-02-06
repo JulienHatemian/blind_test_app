@@ -5,6 +5,7 @@ use Blindtest\Repository\MainRepository;
 use PDO;
 
 require_once(__DIR__ . '/../Models/MainRepository.php');
+
 class MusicRepository
     extends MainRepository
 {
@@ -40,7 +41,6 @@ class MusicRepository
         }
 
         $req = "SELECT * FROM music LEFT JOIN serie ON music.idserie = serie.idserie WHERE idgenre IN ($ingenre) AND idtype IN ($intype) AND file IS NOT NULL ORDER BY RAND() LIMIT :round";
-        // $req = "SELECT * FROM music LEFT JOIN serie ON music.idserie = serie.idserie WHERE idgenre IN ($ingenre) AND idtype IN ($intype) ORDER BY RAND() LIMIT :round";
         $pdo = $this->getDatabase()->prepare($req);
 
         foreach($ingenres as $ingenre => $keygenre){
