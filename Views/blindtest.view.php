@@ -4,7 +4,7 @@
 
 <button data-params='quit' id="quit">Quit</button>
 <button data-params='restart' id="restart">Restart</button>
-<button data-params='previous' id="previous">Previous</button>
+<button data-params='previous' id="previous" disabled>Previous</button>
 <button data-params='play' id="play">Play</button>
 <button data-params='next' id="next">Next</button>
 <button data-params='result' id="result">Result</button>

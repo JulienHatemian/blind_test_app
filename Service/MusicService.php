@@ -34,7 +34,6 @@ class MusicService
 
         if(strpos($typemime, 'audio/') !== false){
             $totaltime = $this->getMP3Duration($audiofile);
-            $totaltime = $totaltime - 3;
             $starttime = 0;
             $endtime = $totaltime;
     
@@ -65,6 +64,6 @@ class MusicService
         $ratio = 16000; //BytesPerSec
         $file_size = filesize($audiofile);
         $duration = ($file_size / $ratio);
-        return round($duration);
+        return round($duration - 5);
     }
 }

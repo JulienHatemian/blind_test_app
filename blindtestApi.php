@@ -17,6 +17,7 @@
 
     if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_SESSION['blindtest']) === true){
         $data = json_decode(file_get_contents('php://input'), true);
+        $maincontroller->log($_SESSION['blindtest']);
         $data = Security::secureArray($data);
         $roundConfig = $_SESSION['blindtest']['rounds']['config'];
 

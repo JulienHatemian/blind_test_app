@@ -3,9 +3,10 @@ const absoluteRootPath = currentURL.substring(0, currentURL.lastIndexOf("/") + 1
 let interval;
 let audioPlayer;
 let isPlaying = false;
-// let player;
 
 document.addEventListener('DOMContentLoaded', function(){
+    checkBlindtest();
+
     let buttons = document.querySelectorAll('[data-params]');
     buttons.forEach(function(button){
         button.addEventListener('click', function(e){
@@ -40,15 +41,25 @@ document.addEventListener('DOMContentLoaded', function(){
     })
 })
 
+function checkBlindtest(){
+    let url = absoluteRootPath + 'blindtestCheck.php';
+    let obj = {};
+    obj['data'] = "test";
+
+    ajaxRequest(url, 'POST', obj, function(response){
+        if(response){
+            Object.entries(response).forEach(([key, value]) => {
+                const element = document.getElementById(key);
+                element.disabled = value;
+            })
+        }
+    })
+}
+
 function blindtestOptions(param){
     let url = absoluteRootPath + 'blindtestApi.php';
     let timer = document.getElementById('timer');
     let actualround = document.getElementById('actualround');
-    // let play = document.getElementById('play');
-    // let next = document.getElementById('next');
-    // let previous = document.getElementById('previous');
-    // let restart = document.getElementById('restart');
-    // let result = document.getElementById('result');
 
     ajaxRequest(url, 'POST', param, function(response){
         if(response.disconnected === true){
@@ -57,25 +68,13 @@ function blindtestOptions(param){
         console.log(response);
         if(response.success === true){
             switch(response.input){
-                case 'start':
-                    if(response.audio && isPlaying === false){
-                        timer.innerHTML = response.timeleft;
-                        isPlaying = true;
-                        startTimer();
-                        playAudio(response.audio);
-                    }
-                    break;
                 case 'play':
                     if(response.audio && isPlaying === false){
                         timer.innerHTML = response.timeleft;
                         isPlaying = true;
+                        checkBlindtest();
                         startTimer();
                         playAudio(response.audio);
-                        // play.disabled = true
-                        // next.disabled = true
-                        // previous.disabled = true
-                        // restart.disabled = true
-                        // result.disabled = true
                     }
                     break;
                 case 'next':
@@ -83,23 +82,15 @@ function blindtestOptions(param){
                         actualround.innerHTML = response.roundactual;
                         timer.innerHTML = response.timeleft;
                         removeResult();
-
-                        // if(response.roundconfig === response.roundactual){
-                        //     next.disabled = true;
-                        // }
-                        // previous.disabled = false;
-                        // result.disabled = true;
+                        checkBlindtest();
                     }
                     break;
                 case 'previous':
                     if(response.success && isPlaying === false && response.roundactual){
                         actualround.innerHTML = response.roundactual;
                         timer.innerHTML = response.timeleft;
-                        removeResult()
-                        // if(response.roundactual <= 1){
-                        //     previous.disabled = true;
-                        // }
-                        // result.disabled = true;
+                        removeResult();
+                        checkBlindtest();
                     }
                     break;
                 case 'restart':
@@ -107,6 +98,7 @@ function blindtestOptions(param){
                         timer.innerHTML = response.timeleft;
                         actualround.innerHTML = response.roundactual;
                         removeResult();
+                        checkBlindtest();
                     }
                     break;
                 case 'result':
@@ -117,17 +109,7 @@ function blindtestOptions(param){
                 case 'endtimer':
                     timer.innerHTML = response.timeleft;
                     isPlaying = false;
-                    // if(response.roundactual > 1){
-                    //     previous.disabled = false;
-                    // }
-
-                    // if(response.roundconfig != response.roundactual){
-                    //     next.disabled = false;
-                    // }
-
-                    // play.disabled = false;
-                    // result.disabled = false;
-                    // restart.disabled = false;
+                    checkBlindtest();
                     break;
                 default:
                     console.log('Wrong input');
