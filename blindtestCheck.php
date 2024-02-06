@@ -1,10 +1,5 @@
 <?php
-    require_once __DIR__ . '/Controllers/MainController.controller.php';
-
-    use Blindtest\Controllers\MainController;
-    $mainController = new MainController();
-    session_start();
-
+session_start();
 if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_SESSION['blindtest']) === true){
     if($_SESSION['blindtest']['timer']['ongoing'] === true){
         //When play

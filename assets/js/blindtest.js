@@ -37,6 +37,8 @@ document.addEventListener('DOMContentLoaded', function(){
             e.preventDefault();
         }
     })
+
+    checkBlindtest();
 })
 
 function checkBlindtest(){
@@ -46,7 +48,9 @@ function checkBlindtest(){
         if(response){
             Object.entries(response).forEach(([key, value]) => {
                 const element = document.getElementById(key);
-                element.disabled = value;
+                if(element){
+                    element.disabled = value;
+                }
             })
         }
     })
