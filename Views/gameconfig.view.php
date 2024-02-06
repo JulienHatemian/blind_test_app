@@ -4,8 +4,8 @@
         <legend>Genres:</legend>
         <?php if(isset($genres)) :?>
         <?php foreach($genres as $genre): ?>
-            <input type="checkbox" name="genre[]" value="<?= $genre['idgenre'] ?>">
-            <label for=""><?= $genre['libelle'] ?></label>
+            <input type="checkbox" name="genre[]" value="<?= $genre['idgenre'] ?>" id="checkGenre<?= $genre['libelle'] ?>">
+            <label for="checkGenre<?= $genre['libelle'] ?>"><?= $genre['libelle'] ?></label>
         <?php endforeach; endif; ?>
     </div>
     
@@ -13,8 +13,8 @@
         <legend>Types:</legend>
         <?php if(isset($types)) :?>
         <?php foreach($types as $type): ?>
-            <input type="checkbox" name="type[]" value="<?= $type['idtype'] ?>">
-            <label for=""><?= $type['libelle'] ?></label>
+            <input type="checkbox" name="type[]" value="<?= $type['idtype'] ?>" id="checkType<?= $type['libelle'] ?>">
+            <label for="checkType<?= $type['libelle'] ?>"><?= $type['libelle'] ?></label>
         <?php endforeach; endif; ?>
     </div>
 
