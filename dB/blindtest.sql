@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : mer. 03 jan. 2024 à 05:56
+-- Généré le : mar. 06 fév. 2024 à 05:19
 -- Version du serveur : 8.0.31
 -- Version de PHP : 8.0.26
 
@@ -33,6 +33,7 @@ DROP TABLE IF EXISTS `gamemode`;
 CREATE TABLE IF NOT EXISTS `gamemode` (
   `idgamemode` int UNSIGNED NOT NULL AUTO_INCREMENT,
   `libelle` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `active` tinyint(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`idgamemode`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -40,9 +41,9 @@ CREATE TABLE IF NOT EXISTS `gamemode` (
 -- Déchargement des données de la table `gamemode`
 --
 
-INSERT INTO `gamemode` (`idgamemode`, `libelle`) VALUES
-(1, 'Classic'),
-(2, 'Convention');
+INSERT INTO `gamemode` (`idgamemode`, `libelle`, `active`) VALUES
+(1, 'Classic', 0),
+(2, 'Convention', 1);
 
 -- --------------------------------------------------------
 
@@ -54,6 +55,8 @@ DROP TABLE IF EXISTS `genre`;
 CREATE TABLE IF NOT EXISTS `genre` (
   `idgenre` int UNSIGNED NOT NULL AUTO_INCREMENT,
   `libelle` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `filepath` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `active` tinyint(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`idgenre`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -61,10 +64,10 @@ CREATE TABLE IF NOT EXISTS `genre` (
 -- Déchargement des données de la table `genre`
 --
 
-INSERT INTO `genre` (`idgenre`, `libelle`) VALUES
-(1, 'Anime'),
-(2, 'Video games'),
-(4, 'Disney');
+INSERT INTO `genre` (`idgenre`, `libelle`, `filepath`, `active`) VALUES
+(1, 'Anime', 'anime', 1),
+(2, 'Video games', 'game', 1),
+(4, 'Disney', 'disney', 0);
 
 -- --------------------------------------------------------
 
@@ -88,7 +91,7 @@ CREATE TABLE IF NOT EXISTS `music` (
   KEY `FK_TYPE_MUSIC` (`idtype`),
   KEY `FK_GENRE_MUSIC` (`idgenre`),
   KEY `FK_SERIE_MUSIC` (`idserie`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Déchargement des données de la table `music`
@@ -96,11 +99,12 @@ CREATE TABLE IF NOT EXISTS `music` (
 
 INSERT INTO `music` (`idmusic`, `title`, `group`, `number`, `link`, `file`, `report`, `idtype`, `idgenre`, `idserie`) VALUES
 (1, 'Idol', 'YOASOBI', 'Season 1 - OP 1', 'https://www.youtube.com/watch?v=PgBvV9ofjmA', NULL, 0, 1, 1, 1),
-(2, 'Kien Romance', 'Akari Nanawo', 'Season 1 - OP 1', 'https://www.youtube.com/watch?v=VXEpLEK75V8', NULL, 0, 1, 1, 2),
-(3, 'Hana ni natte', 'Ryokuoushoku Shakai', 'Season 1 - OP 1', 'https://www.youtube.com/watch?v=z9JZB08qy44', 'VXEpLEK75V8', 0, 1, 1, 3),
-(4, 'Fight for the future', NULL, NULL, 'https://www.youtube.com/watch?v=5USJRH7RCpw', NULL, 0, 1, 2, 4),
-(5, 'Itsu Aetara', NULL, 'Season 1 - OP 1', 'https://www.youtube.com/watch?v=j0dQmivkJTw', NULL, 0, 1, 1, 5),
-(6, 'KICK BACK', 'Kenshi Yonezu', 'Season 1 - OP 1', 'https://www.youtube.com/watch?v=dFlDRhvM4L0', 'dFlDRhvM4L0', 0, 1, 1, 6);
+(2, 'Kien Romance', 'Akari Nanawo', 'Season 1 - OP 1', 'https://www.youtube.com/watch?v=VXEpLEK75V8', 'VXEpLEK75V8', 0, 1, 1, 2),
+(3, 'Hana ni natte', 'Ryokuoushoku Shakai', 'Season 1 - OP 1', 'https://www.youtube.com/watch?v=z9JZB08qy44', 'z9JZB08qy44', 0, 1, 1, 3),
+(4, 'Fight for the future', NULL, NULL, 'https://www.youtube.com/watch?v=5USJRH7RCpw', '5USJRH7RCpw', 0, 1, 2, 4),
+(5, 'Itsu Aetara', 'Aiko', 'Season 1 - OP 1', 'https://www.youtube.com/watch?v=j0dQmivkJTw', 'j0dQmivkJTw', 0, 1, 1, 5),
+(6, 'KICK BACK', 'Kenshi Yonezu', 'Season 1 - OP 1', 'https://www.youtube.com/watch?v=dFlDRhvM4L0', 'dFlDRhvM4L0', 0, 1, 1, 6),
+(7, 'Shinda!', ' Oishi Masayoshi', 'Season 1 - OP 1', 'https://www.youtube.com/watch?v=z1VBlur77cI', 'z1VBlur77cI', 0, 1, 1, 7);
 
 -- --------------------------------------------------------
 
@@ -115,7 +119,7 @@ CREATE TABLE IF NOT EXISTS `serie` (
   `year` year NOT NULL,
   `studio` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
   PRIMARY KEY (`idserie`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Déchargement des données de la table `serie`
@@ -127,7 +131,8 @@ INSERT INTO `serie` (`idserie`, `libelle`, `year`, `studio`) VALUES
 (3, 'Kusuriya no Hitorigoto', 2023, 'OLM/TOHO animation STUDIO'),
 (4, 'Dragon Ball Z: Shin Budokai 2', 2007, 'Namco Bandai'),
 (5, 'Insomniacs after school', 2023, 'LIDENFILMS'),
-(6, 'Chainsaw Man', 2022, 'MAPPA');
+(6, 'Chainsaw Man', 2022, 'MAPPA'),
+(7, 'The legendary hero is dead', 2023, 'Liden Films');
 
 -- --------------------------------------------------------
 
@@ -139,6 +144,7 @@ DROP TABLE IF EXISTS `type`;
 CREATE TABLE IF NOT EXISTS `type` (
   `idtype` int UNSIGNED NOT NULL AUTO_INCREMENT,
   `libelle` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `filepath` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
   `active` tinyint(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`idtype`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -147,10 +153,10 @@ CREATE TABLE IF NOT EXISTS `type` (
 -- Déchargement des données de la table `type`
 --
 
-INSERT INTO `type` (`idtype`, `libelle`, `active`) VALUES
-(1, 'Opening', 1),
-(2, 'Ending', 1),
-(3, 'OST', 1);
+INSERT INTO `type` (`idtype`, `libelle`, `filepath`, `active`) VALUES
+(1, 'Opening', 'opening', 1),
+(2, 'Ending', 'ending', 1),
+(3, 'OST', 'ost', 1);
 
 --
 -- Contraintes pour les tables déchargées
