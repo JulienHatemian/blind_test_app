@@ -1,4 +1,4 @@
-function ajaxRequest(url, method, param, callback){
+function ajaxRequest(url, method, param = null, callback){
     let xhr = new XMLHttpRequest();
 
     xhr.onreadystatechange = function(){
@@ -9,5 +9,9 @@ function ajaxRequest(url, method, param, callback){
 
     xhr.open(method, url, true);
     xhr.setRequestHeader('Content-type', 'application/json')
-    xhr.send(JSON.stringify(param));
+    if(param != null){
+        xhr.send(JSON.stringify(param));
+    }else{
+        xhr.send();
+    }
 }

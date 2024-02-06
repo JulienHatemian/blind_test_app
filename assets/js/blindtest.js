@@ -5,8 +5,6 @@ let audioPlayer;
 let isPlaying = false;
 
 document.addEventListener('DOMContentLoaded', function(){
-    checkBlindtest();
-
     let buttons = document.querySelectorAll('[data-params]');
     buttons.forEach(function(button){
         button.addEventListener('click', function(e){
@@ -43,10 +41,8 @@ document.addEventListener('DOMContentLoaded', function(){
 
 function checkBlindtest(){
     let url = absoluteRootPath + 'blindtestCheck.php';
-    let obj = {};
-    obj['data'] = "test";
 
-    ajaxRequest(url, 'POST', obj, function(response){
+    ajaxRequest(url, 'POST', null, function(response){
         if(response){
             Object.entries(response).forEach(([key, value]) => {
                 const element = document.getElementById(key);
