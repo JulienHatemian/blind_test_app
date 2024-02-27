@@ -9,7 +9,12 @@ require_once(__DIR__ . '/../Models/MainRepository.php');
 class GenreRepository
     extends MainRepository
 {
-    public function getAllGenre(){
+    /**
+     * Get all genre
+     * @return array
+     */
+    public function getAllGenre():array
+    {
         $req = "SELECT * FROM genre";
         $pdo = $this->getDatabase()->prepare($req);
         $pdo->execute();
@@ -18,7 +23,13 @@ class GenreRepository
         return $data;
     }
 
-    public function getGenreById($id){
+    /**
+     * Get  one genre by its id
+     * @param int $id
+     * @return array
+     */
+    public function getGenreById($id):array
+    {
         $req = "SELECT * FROM genre WHERE idgenre = :idgenre";
         $pdo = $this->getDatabase()->prepare($req);
         $pdo->bindValue(':idgenre', $id, PDO::PARAM_INT);

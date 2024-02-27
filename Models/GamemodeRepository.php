@@ -9,6 +9,10 @@ require_once(__DIR__ . '/../Models/MainRepository.php');
 class GamemodeRepository
     extends MainRepository
 {
+    /**
+     * Get all gamemodes from the database.
+     * @return array
+     */
     public function getAllGamemode():array
     {
         $req = "SELECT * FROM gamemode";
@@ -19,6 +23,11 @@ class GamemodeRepository
         return $data;
     }
 
+    /**
+     * Get  a specific gamemode by its id.
+     * @param int $id The id
+     * @return array
+     */
     public function getGamemodeById(int $id):array
     {
         $req = "SELECT * FROM gamemode WHERE idgamemode = :id";

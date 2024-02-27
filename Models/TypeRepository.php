@@ -9,7 +9,12 @@ require_once(__DIR__ . '/../Models/MainRepository.php');
 class TypeRepository
     extends MainRepository
 {
-    public function getAllType(){
+    /**
+     * Array of all types.
+     * @return array
+     */
+    public function getAllType():array
+    {
         $req = "SELECT * FROM type";
         $pdo = $this->getDatabase()->prepare($req);
         $pdo->execute();
@@ -18,7 +23,13 @@ class TypeRepository
         return $data;
     }
 
-    public function getTypeById($id){
+    /**
+     * Array  of a specific type, given its id.
+     * @param  int $id
+     * @return array
+     */
+    public function getTypeById(int $id):array
+    {
         $req = "SELECT * FROM type WHERE idtype = :idtype";
         $pdo = $this->getDatabase()->prepare($req);
         $pdo->bindValue(':idtype', $id, PDO::PARAM_INT);

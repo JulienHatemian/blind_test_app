@@ -9,7 +9,11 @@ require_once(__DIR__ . '/../Models/MainRepository.php');
 class MusicRepository
     extends MainRepository
 {
-    public function getAllMusic() :array
+    /**
+     * Get all music
+     * @return  array
+     */
+    public function getAllMusic():array
     {
         $req = "SELECT * FROM music";
         $pdo = $this->getDatabase()->prepare($req);
@@ -19,7 +23,14 @@ class MusicRepository
         return $data;
     }
 
-    public function getBlindtestMusic(array $genres, array $types, int $round) :array
+    /**
+     * Get all the music for the blindtest, depending of the genre and type.
+     * @param array $genres
+     * @param array $types
+     * @param int $round
+     * @return  array
+     */
+    public function getBlindtestMusic(array $genres, array $types, int $round):array
     {
         $ingenre = '';
         $i = 0;

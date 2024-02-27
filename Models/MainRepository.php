@@ -9,7 +9,12 @@ require_once(__DIR__ . '/../dB/dbConnection.php');
 class MainRepository
     extends dbConnection
 {
-    public function getData(){
+    /**
+     * Get all the data from music
+     * @return  array
+     */
+    public function getData():array
+    {
         $req = "SELECT * FROM music";
         $pdo = $this->getDatabase()->prepare($req);
         $pdo->execute();
