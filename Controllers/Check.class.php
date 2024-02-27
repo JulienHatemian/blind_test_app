@@ -22,6 +22,15 @@ class Check
         $this->gamemoderepository = new GamemodeRepository();
     }
 
+    /**
+     * Check every parameter for the configuration of the blindtest
+     * @param array $genres
+     * @param array $types
+     * @param integer $gamemode
+     * @param integer $rounds
+     * @param integer $timer
+     * @return boolean
+     */
     public function checkConfig(array $genres, array $types, int $gamemode, int $rounds, int $timer):bool
     {
         if(empty($genres) || empty($types) || empty($gamemode) || empty($rounds) || empty($timer)){

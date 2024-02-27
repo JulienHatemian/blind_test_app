@@ -25,7 +25,7 @@ class TypeRepository
 
     /**
      * Array  of a specific type, given its id.
-     * @param  int $id
+     * @param int $id
      * @return array
      */
     public function getTypeById(int $id):array

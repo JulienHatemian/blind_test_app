@@ -3,11 +3,21 @@ namespace Blindtest\Controllers;
 
 class Security
 {
-    public static function secuteHTML($data):string
+    /**
+     * Secure the string
+     * @param mixed $data
+     * @return string
+     */
+    public static function secuteHTML(mixed $data):string
     {
         return htmlentities($data);
     }
 
+    /**
+     * Secure array
+     * @param array $array
+     * @return array
+     */
     public static function secureArray(array $array):array
     {
         $result = array();
@@ -21,6 +31,10 @@ class Security
         return $result;
     }
 
+    /**
+     * Check if blindtest if ongoing. Return true if exist, false if not.
+     * @return bool
+     */
     public static function blindtestOngoing():bool
     {
         return (isset($_SESSION['blindtest'])) ? true : false;
