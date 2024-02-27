@@ -18,7 +18,14 @@ class MusicService
         $this->typerepository = new TypeRepository();
     }
 
-    public function getMusicFile($file, $idgenre, $idtype, $timer){
+    /**
+     * Get the MP3 file for the blindtest
+     * @param string $file
+     * @param integer $idgenre
+     * @param integer $idtype
+     * @return array|bool
+     */
+    public function getMusicFile(string $file, int $idgenre, int $idtype) :array|bool{
         $genre = $this->genrerepository->getGenreById($idgenre);
         $type = $this->typerepository->getTypeById($idtype);
 
@@ -55,8 +62,13 @@ class MusicService
         }
     }
 
+    /**
+     * Get approximately duration of the MP3 file depending of the bitrate
+     * @param string $audiofile
+     * @return int
+     */
     public function getMP3Duration($audiofile){
-        $ratio = 16000; //BytesPerSec
+        $ratio = 16000;
         $file_size = filesize($audiofile);
         $duration = ($file_size / $ratio);
         return round($duration - 5);

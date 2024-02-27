@@ -14,6 +14,15 @@ class BlindtestService
         $this->musicrepository = new MusicRepository();
     }
 
+    /**
+     * Create the blindtest by using the $_SESSION as a reference to store all data in it.
+     * @param array $genre
+     * @param array $type
+     * @param integer $timer
+     * @param integer $round
+     * @param integer $gamemode
+     * @return void
+     */
     public function createBlindtest(array $genre, array $type, int $timer, int $round, int $gamemode) :void
     {
         if(empty($_SESSION)){
@@ -30,6 +39,11 @@ class BlindtestService
         } 
     }
 
+    /**
+     * Check if the time left result doesn't seems odd. If so, update the timer session variable and return true. Otherwise return false.
+     * @param integer $time
+     * @return boolean
+     */
     public function checkTimestamp(int $time) :bool
     {
         $totaltime = $_SESSION['blindtest']['timer']['config'];
