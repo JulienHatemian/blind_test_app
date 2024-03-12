@@ -15,19 +15,19 @@ class MainController{
 
     //Propriety "page_css" : Array to add specific CSS files
     //Propriety "page_javascript" : Array to add specific JS files
-    public function homepage(){
-        // Toolbox::addAlertMessage("test", Toolbox::GREEN_COLOR);
+    // public function homepage(){
+    //     // Toolbox::addAlertMessage("test", Toolbox::GREEN_COLOR);
 
-        $data_page = [
-            "page_description" => "Homepage's description",
-            "page_title" => "Blindtest - Homepage",
-            "views" => "views/homepage.view.php",
-            "template" => "views/partials/template.php",
-            "page_css" => ['style.css'],
-            "page_javascript" => ['script.js']
-        ];
-        $this->generatePage($data_page);
-    }
+    //     $data_page = [
+    //         "page_description" => "Homepage's description",
+    //         "page_title" => "Blindtest - Homepage",
+    //         "views" => "views/homepage.view.php",
+    //         "template" => "views/partials/template.php",
+    //         "page_css" => ['style.css'],
+    //         "page_javascript" => ['script.js']
+    //     ];
+    //     $this->generatePage($data_page);
+    // }
 
     public function errorPage($msg){
         $data_page = [

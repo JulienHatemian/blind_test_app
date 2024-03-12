@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', function(){
         let confirmation = window.confirm('Are you sure you want to quit ? You will have to generate a new blindtest.')
 
         if(confirmation){
-            window.location.href = absoluteRootPath + 'homepage';
+            window.location.href = absoluteRootPath + 'gameconfig';
         }else{
             e.preventDefault();
         }

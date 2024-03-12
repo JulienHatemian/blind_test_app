@@ -22,18 +22,18 @@ $checkController = new Check();
 
 try{
     if(empty($_GET['page'])){
-        $page = 'homepage';
+        $page = 'gameconfig';
     }else{
         $url = explode('/', filter_var($_GET['page'], FILTER_SANITIZE_URL));
         $page = $url[0];
     }
 
     switch($page){
-        case "homepage": $mainController->homepage();
-            if(Security::blindtestOngoing() === true){
-                session_destroy();
-            }
-            break;
+        // case "homepage": $mainController->homepage();
+        //     if(Security::blindtestOngoing() === true){
+        //         session_destroy();
+        //     }
+        //     break;
         case "gameconfig": $blindtestController->gameconfig();
             if(Security::blindtestOngoing() === true){
                 session_destroy();
