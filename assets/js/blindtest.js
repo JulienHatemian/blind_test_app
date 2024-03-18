@@ -5,6 +5,7 @@ let audioPlayer;
 let isPlaying = false;
 
 document.addEventListener('DOMContentLoaded', function(){
+    //Get action from button with data-params attribute and execute it.
     let buttons = document.querySelectorAll('[data-params]');
     buttons.forEach(function(button){
         button.addEventListener('click', function(e){
@@ -27,6 +28,7 @@ document.addEventListener('DOMContentLoaded', function(){
         })
     })
 
+    //h1 act like an exit button if blindtest ongoing.
     let h1 = document.querySelector('h1');
     h1.addEventListener('click', function(e){
         let confirmation = window.confirm('Are you sure you want to quit ? You will have to generate a new blindtest.')
@@ -41,6 +43,7 @@ document.addEventListener('DOMContentLoaded', function(){
     checkBlindtest();
 })
 
+//Check the state of the blindtest by making a request with AJAX and disable the button according the condition.
 function checkBlindtest(){
     let url = absoluteRootPath + 'blindtestCheck.php';
 
@@ -56,6 +59,7 @@ function checkBlindtest(){
     })
 }
 
+//Use the blindtest API to interact with the command (play, pause, next, previous).
 function blindtestOptions(param){
     let url = absoluteRootPath + 'blindtestApi.php';
     let timer = document.getElementById('timer');
@@ -68,6 +72,7 @@ function blindtestOptions(param){
         if(response.success === true){
             switch(response.input){
                 case 'play':
+                    //Play the audio and start the timer.
                     if(response.audio && isPlaying === false){
                         timer.innerHTML = response.timeleft;
                         isPlaying = true;
@@ -77,6 +82,7 @@ function blindtestOptions(param){
                     }
                     break;
                 case 'next':
+                    //Go to the next song.
                     if(response.success && isPlaying === false && response.roundactual){
                         actualround.innerHTML = response.roundactual;
                         timer.innerHTML = response.timeleft;
@@ -85,6 +91,7 @@ function blindtestOptions(param){
                     }
                     break;
                 case 'previous':
+                    //Go to the previous song.
                     if(response.success && isPlaying === false && response.roundactual){
                         actualround.innerHTML = response.roundactual;
                         timer.innerHTML = response.timeleft;
@@ -93,6 +100,7 @@ function blindtestOptions(param){
                     }
                     break;
                 case 'restart':
+                    //Restart the blindtest from the start.
                     if(response.success && isPlaying === false && response.roundactual){
                         timer.innerHTML = response.timeleft;
                         actualround.innerHTML = response.roundactual;
@@ -101,16 +109,19 @@ function blindtestOptions(param){
                     }
                     break;
                 case 'result':
+                    //Get the result of the current song.
                     if(response.data && isPlaying === false){
                         showResult(response.data);
                     }
                     break;
                 case 'endtimer':
+                    //Stop the timer when it reaches 0.
                     timer.innerHTML = response.timeleft;
                     isPlaying = false;
                     checkBlindtest();
                     break;
                 default:
+                    //No valid input
                     console.log('Wrong input');
             }
         }
@@ -172,33 +183,33 @@ function showResult(data){
             resultContainer.appendChild(year);
         }
 
-        if(data.number){
-            let number = document.createElement('p');
-            let span = document.createElement('span');
-            number.id = 'season';
+        // if(data.number){
+        //     let number = document.createElement('p');
+        //     let span = document.createElement('span');
+        //     number.id = 'season';
             
-            span.classList.add('resultElement');
-            span.textContent = 'Season:';
+        //     span.classList.add('resultElement');
+        //     span.textContent = 'Season:';
             
-            number.appendChild(span);
-            number.appendChild(document.createTextNode(' ' + data.number));
+        //     number.appendChild(span);
+        //     number.appendChild(document.createTextNode(' ' + data.number));
 
-            resultContainer.appendChild(number);
-        }
+        //     resultContainer.appendChild(number);
+        // }
 
-        if(data.studio){
-            let studio = document.createElement('p');
-            let span = document.createElement('span');
-            studio.id = 'studio';
+        // if(data.studio){
+        //     let studio = document.createElement('p');
+        //     let span = document.createElement('span');
+        //     studio.id = 'studio';
             
-            span.classList.add('resultElement');
-            span.textContent = 'Studio:';
+        //     span.classList.add('resultElement');
+        //     span.textContent = 'Studio:';
             
-            studio.appendChild(span);
-            studio.appendChild(document.createTextNode(' ' + data.studio));
+        //     studio.appendChild(span);
+        //     studio.appendChild(document.createTextNode(' ' + data.studio));
 
-            resultContainer.appendChild(studio);
-        }
+        //     resultContainer.appendChild(studio);
+        // }
 
         if(data.libelle){
             let libelle = document.createElement('p');
