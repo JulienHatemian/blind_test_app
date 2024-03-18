@@ -128,6 +128,7 @@ function blindtestOptions(param){
     })
 }
 
+//Generate div with the result of the song
 function showResult(data){
     let main = document.getElementById('mainContent');
     let round = document.getElementById('round');
@@ -141,6 +142,7 @@ function showResult(data){
         libelleContainer.id = 'libelleContainer';
         resultContainer.id = 'resultContainer';
 
+        //Show the title of the song
         if(data.title){
             let title = document.createElement('p');
             let span = document.createElement('span');
@@ -155,20 +157,22 @@ function showResult(data){
             resultContainer.appendChild(title);
         }
 
-        if(data.group){
-            let group = document.createElement('p');
-            let span = document.createElement('span');
-            group.id = 'year';
+        //Show the name of the group or interpreter
+        // if(data.group){
+        //     let group = document.createElement('p');
+        //     let span = document.createElement('span');
+        //     group.id = 'year';
             
-            span.classList.add('resultElement');
-            span.textContent = 'Group:';
+        //     span.classList.add('resultElement');
+        //     span.textContent = 'Group:';
             
-            group.appendChild(span);
-            group.appendChild(document.createTextNode(' ' + data.group));
+        //     group.appendChild(span);
+        //     group.appendChild(document.createTextNode(' ' + data.group));
 
-            resultContainer.appendChild(group);
-        }
+        //     resultContainer.appendChild(group);
+        // }
 
+        //Show the year of production
         if(data.year){
             let year = document.createElement('p');
             let span = document.createElement('span');
@@ -183,6 +187,7 @@ function showResult(data){
             resultContainer.appendChild(year);
         }
 
+        //Show the number of season
         // if(data.number){
         //     let number = document.createElement('p');
         //     let span = document.createElement('span');
@@ -197,6 +202,7 @@ function showResult(data){
         //     resultContainer.appendChild(number);
         // }
 
+        //Show the studio
         // if(data.studio){
         //     let studio = document.createElement('p');
         //     let span = document.createElement('span');
@@ -211,6 +217,7 @@ function showResult(data){
         //     resultContainer.appendChild(studio);
         // }
 
+        //Show the title of the serie
         if(data.libelle){
             let libelle = document.createElement('p');
             libelle.textContent = data.libelle;
@@ -221,6 +228,7 @@ function showResult(data){
         main.insertBefore(resultContainer, round);
         main.insertBefore(libelleContainer, round);
 
+        //Show the youtube video for the result.
         if(data.link){
             insertVisualResult(data.file);
         }
@@ -231,6 +239,7 @@ function showResult(data){
     }
 }
 
+//Remover the container the result.
 function removeResult(){
     let result = document.getElementById('resultContainer');
     let title = document.getElementById('libelleContainer');
@@ -242,6 +251,7 @@ function removeResult(){
     }
 }
 
+//Create the iframe to show the youtube video.
 function insertVisualResult(idyoutube){
     let main = document.getElementById('mainContent');
     let result = document.getElementById('resultContainer')
@@ -257,6 +267,7 @@ function insertVisualResult(idyoutube){
     main.insertBefore(iframe, result);
 }
 
+//Start the timer
 function startTimer(){
     let timer = document.getElementById('timer');
 
@@ -284,9 +295,10 @@ function startTimer(){
     }
 }
 
+//Play the audio file
 function playAudio(param){
     let player = new Audio();
-    player.volume = 0.4;
+    player.volume = 0.5;
         
     player.addEventListener('canplaythrough', function(){
         isPlaying = true;
