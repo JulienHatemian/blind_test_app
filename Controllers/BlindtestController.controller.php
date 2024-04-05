@@ -30,7 +30,7 @@ class BlindtestController
 
     public function gameconfig(){
 
-        $genre = $this->genreRepository->getAllGenre();
+        $genre = $this->genreRepository->getActiveGenre();
         $type = $this->typeRepository->getAllType();
         $gamemode = $this->gamemodeRepository->getAllGamemode();
 

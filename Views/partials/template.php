@@ -11,6 +11,7 @@
     <?php endif; ?>
 </head>
 <body>
+    <div id="background"></div>
     <main id="mainContent">
         <?php require_once("Views/partials/header.php") ?>
         <?php

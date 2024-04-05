@@ -24,6 +24,20 @@ class GenreRepository
     }
 
     /**
+     * Get all active genre
+     * @return array
+     */
+    public function getActiveGenre():array
+    {
+        $req = "SELECT * FROM genre WHERE active = 1";
+        $pdo = $this->getDatabase()->prepare($req);
+        $pdo->execute();
+        $data = $pdo->fetchAll(PDO::FETCH_ASSOC);
+        $pdo->closeCursor();
+        return $data;
+    }
+
+    /**
      * Get  one genre by its id
      * @param int $id
      * @return array
