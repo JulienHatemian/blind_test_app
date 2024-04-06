@@ -23,6 +23,7 @@
 }
 
 small{
+    color: var(--light-gray);
     font-size: 0.6em;
     font-style: italic;
 }
@@ -60,6 +61,8 @@ legend{
 
 .checkbox{
     margin: 10px;
+    font-weight: 400;
+    font-style: italic;
 }
 
 input[type="checkbox"]{
@@ -87,7 +90,7 @@ button[name="gamemode"]:enabled{
 }
 
 button[name="gamemode"]:hover:enabled{
-    background-color: rgb(81, 96, 179);
+    background-color: var(--main-dark-blue);
     border-color: #c0c5e0;
 }
 
