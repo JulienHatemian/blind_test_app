@@ -1,10 +1,10 @@
 <div id="configcontainer">
     <h2>Blintest - Configuration</h2>
-    <form action="<?= URL; ?>blindtest" method="post" id="form-config">
+    <form action="<?= URL; ?>blindtest" method="post" id="form-config" class="d-flex flex-column">
         <div class="form-group">
             <?php if(isset($genres)) :?>
                 <legend>Genres:</legend>
-                <div class="checkbox-container d-flex flex-row">
+                <div class="justify-content-center d-flex flex-row">
                     <?php foreach($genres as $genre): ?>
                         <div class="checkbox">
                             <input type="checkbox" name="genre[]" value="<?= $genre['idgenre'] ?>" id="checkGenre<?= $genre['libelle'] ?>">
@@ -18,7 +18,7 @@
         <div class="form-group">
             <?php if(isset($types)) :?>
                 <legend>Types:</legend>
-                <div class="checkbox-container d-flex flex-row">
+                <div class="justify-content-center d-flex flex-row">
                     <?php foreach($types as $type): ?>
                         <div class="checkbox">
                             <input type="checkbox" name="type[]" value="<?= $type['idtype'] ?>" id="checkType<?= $type['libelle'] ?>">
@@ -48,9 +48,11 @@
         <div class="form-group">
             <?php if(isset($gamemodes)) :?>
                 <legend>Game mode:</legend>
-                <?php foreach($gamemodes as $gamemode): ?>
-                    <button type="submit" class="button-type" name="gamemode" value="<?= $gamemode['idgamemode'] ?>" <?php echo(($gamemode['active'] == 0) ? 'disabled' : '') ?>><?= $gamemode['libelle'] ?></button>
-                <?php endforeach; ?>
+                <div class="d-flex flex-row justify-content-center">
+                    <?php foreach($gamemodes as $gamemode): ?>
+                        <button type="submit" class="button-type" name="gamemode" value="<?= $gamemode['idgamemode'] ?>" <?php echo(($gamemode['active'] == 0) ? 'disabled' : '') ?>><?= $gamemode['libelle'] ?></button>
+                    <?php endforeach; ?>
+                </div>
             <?php endif; ?>
         </div>
     </form>
