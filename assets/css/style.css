@@ -81,3 +81,20 @@ a:link, a:visited, a:hover{
     text-decoration: none;
     color: #fff;
 }
+
+.d-flex{
+    display: flex;
+    flex-direction: row;
+}
+
+.flex-row{
+    flex-direction: row;
+}
+
+.flex-column{
+    flex-direction: column;
+}
+
+.space-around{
+    justify-content: space-around;
+}
