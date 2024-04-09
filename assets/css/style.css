@@ -5,6 +5,7 @@
     --dark-gray: #adadad;
     --main-dark: #3d3d3d;
     --main-dark-blue: #5160b3;
+    --main-deep-blue: #47528d;
 }
 
 @font-face {
@@ -194,6 +195,10 @@ a:link, a:visited, a:hover{
 
 .space-around{
     justify-content: space-around;
+}
+
+.space-between{
+    justify-content: space-between;
 }
 
 .justify-content-center{

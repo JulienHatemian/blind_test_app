@@ -1,0 +1,91 @@
+@keyframes rotate-y-90{
+    0%{
+        transform: translate(-50%, -50%) rotateY(-90deg);
+    }
+
+    100%{
+        transform: translate(-50%, -50%) rotateY(0);
+    }
+}
+
+#timer{
+    color: var(--white);
+    font-size: 10em;
+    font-weight: bolder;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.rotate-animation{
+    animation: rotate-y-90 1s linear infinite;
+}
+
+#round{
+    display: flex;
+    font-size: 6em;
+    font-weight: 100;
+    padding: 20px;
+    color: var(--white);
+    justify-content: left;
+}
+
+.icon-button{
+    height: 50px;
+    width: 50px;
+    border-radius: 5px;
+}
+
+#quit{
+    background-color: red;
+}
+
+#restart{
+    background-color: var(--main-dark-blue);
+}
+
+#previous{
+    background-color: var(--main-dark-blue);
+}
+
+#next{
+    background-color: var(--main-dark-blue);
+}
+
+#play, #result{
+    background-color: green;
+}
+
+#result{
+    font-size: 1.5em;
+    font-weight: 100;
+    color: var(--white);
+    height: 50px;
+    width: 90px;
+}
+
+svg{
+    height: 35px;
+    width: 35px;
+}
+
+#blindtest-input{
+    padding: 0.5em;
+}
+
+#blindtest-input > button:disabled, #blindtest-input > #control-input > button:disabled {
+    background-color: rgb(110, 110, 110);
+}
+
+#blindtest-input > #control-input > button:hover:enabled:not(#play){
+    background-color: var(--main-deep-blue);
+}
+
+#quit:hover{
+    background-color: #d12424;
+}
+
+#play:hover, #result:hover{
+    background-color: rgb(0, 110, 0);
+}

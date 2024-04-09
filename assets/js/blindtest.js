@@ -276,11 +276,11 @@ function startTimer(){
 
         if(timeleft > 0){
             interval = setInterval(() => {
+                timer.classList.add('rotate-animation');
                 timeleft--
                 timer.textContent = timeleft;
                 if(timeleft == 0){
                     let obj = {};
-                    let timer = document.getElementById('timer');
                     let timeleft = parseInt(timer.innerHTML);
 
                     obj['dataParams'] = 'endtimer';
@@ -289,6 +289,7 @@ function startTimer(){
                     blindtestOptions(obj);
                     clearInterval(interval);
                     interval = null;
+                    timer.classList.remove('rotate-animation')
                 }
             }, 1000);
         }
