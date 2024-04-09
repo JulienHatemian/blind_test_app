@@ -7,7 +7,7 @@
     height: auto;
     background-color: rgba(142, 154, 223, 0.75);
     text-align: center;
-    padding: 2em;
+    padding: 1.5em;
     border-radius: 2%;
 }
 
@@ -28,8 +28,10 @@ small{
 
 h2{
     color: var(--white);
-    text-decoration: underline;
+    /* text-decoration: underline; */
     margin-bottom: 0.5em;
+    font-weight: 100;
+    font-size: 3em;
 }
 
 #timer, #rounds{
@@ -44,6 +46,7 @@ input::-webkit-inner-spin-button, input::-webkit-outer-spin-button{
 input[type="number"] {
     -moz-appearance: textfield;
     appearance: textfield;
+    font-weight: bold;
 }
 
 legend{
