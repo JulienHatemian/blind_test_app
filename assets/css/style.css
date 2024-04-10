@@ -105,6 +105,7 @@ body, *{
 }
 
 body{
+    height: 100%;
     font-family: "Roboto", "PT Sans", Calibri, Tahoma, sans-serif;
 }
 

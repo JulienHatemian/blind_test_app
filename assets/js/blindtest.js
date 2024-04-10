@@ -131,7 +131,7 @@ function blindtestOptions(param){
 //Generate div with the result of the song
 function showResult(data){
     let main = document.getElementById('mainContent');
-    let round = document.getElementById('round');
+    let timer = document.getElementById('timer');
     let result = document.getElementById('resultContainer');
     let title = document.getElementById('libelleContainer');
     let resultVideo = document.getElementById('resultVideo');
@@ -225,8 +225,8 @@ function showResult(data){
             libelleContainer.appendChild(libelle);
         }
 
-        main.insertBefore(resultContainer, round);
-        main.insertBefore(libelleContainer, round);
+        main.insertBefore(resultContainer, timer);
+        main.insertBefore(libelleContainer, timer);
 
         //Show the youtube video for the result.
         if(data.link){
@@ -276,7 +276,6 @@ function startTimer(){
 
         if(timeleft > 0){
             interval = setInterval(() => {
-                timer.classList.add('rotate-animation');
                 timeleft--
                 timer.textContent = timeleft;
                 if(timeleft == 0){
@@ -289,7 +288,6 @@ function startTimer(){
                     blindtestOptions(obj);
                     clearInterval(interval);
                     interval = null;
-                    timer.classList.remove('rotate-animation')
                 }
             }, 1000);
         }
